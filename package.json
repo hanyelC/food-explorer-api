@@ -1,0 +1,36 @@
+{
+  "name": "food-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanyelC/food-explorer-api.git"
+  },
+  "author": "Hanyel Chamon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanyelC/food-explorer-api/issues"
+  },
+  "homepage": "https://github.com/hanyelC/food-explorer-api#readme",
+  "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "*.test.js",
+      "docs/*"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1"
+  }
+}

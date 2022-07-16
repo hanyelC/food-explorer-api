@@ -7,31 +7,39 @@ class UserCreateService {
   }
 
   async execute({ name, email, password, passwordConfirm }) {
-    if (!name)
+    if (!name) {
       throw new AppError('Nome é obrigatório.')
+    }
 
-    if (!email)
+    if (!email) {
       throw new AppError('Email é obrigatório.')
+    }
 
-    if (!password)
+    if (!password) {
       throw new AppError('Senha é obrigatória.')
+    }
 
-    if (!passwordConfirm)
+    if (!passwordConfirm) {
       throw new AppError('Confirmação da senha é obrigatória.')
+    }
 
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       throw new AppError('Formato de email inválido, formato exemplo: fulano@gmail.com')
+    }
 
-    if (password.length < 6)
+    if (password.length < 6) {
       throw new AppError('A senha precisa ter no mínimo 6 caracteres.')
+    }
 
-    if (password != passwordConfirm)
+    if (password != passwordConfirm) {
       throw new AppError('Senhas não conferem.')
+    }
 
     const userWithEmail = await this.repository.findByEmail(email)
 
-    if (userWithEmail)
+    if (userWithEmail) {
       throw new AppError('Email já cadastrado.')
+    }
 
     const hashedPassword = hashSync(password)
 

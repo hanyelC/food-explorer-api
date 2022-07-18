@@ -1,5 +1,5 @@
 const { IngredientCreateService } = require('../IngredientCreateService')
-const { IngredientsRepositoryInMemory } = require('../../../repositories/IngredientsRepositoryInMemory')
+const { IngredientsRepositoryInMemory } = require('../../../repositories/ingredients/IngredientsRepositoryInMemory')
 const { AppError } = require('../../../utils/AppError')
 
 describe('IngredientCreateService', () => {

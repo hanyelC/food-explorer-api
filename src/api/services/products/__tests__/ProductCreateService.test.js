@@ -1,5 +1,5 @@
 const { ProductCreateService } = require('../ProductCreateService')
-const { ProductRepositoryInMemory } = require('../../../repositories/ProductRepositoryInMemory')
+const { ProductRepositoryInMemory } = require('../../../repositories/products/ProductRepositoryInMemory')
 const { AppError } = require('../../../utils/AppError')
 
 describe('ProductCreateService', () => {

@@ -1,6 +1,6 @@
 const { AppError } = require('../../../utils/AppError')
 const { CategoryCreateService } = require('../CategoryCreateService')
-const { CategoryRepositoryInMemory } = require('../../../repositories/CategoryRepositoryInMemory')
+const { CategoryRepositoryInMemory } = require('../../../repositories/categories/CategoryRepositoryInMemory')
 
 describe('CategoryCreateService', () => {
   let category

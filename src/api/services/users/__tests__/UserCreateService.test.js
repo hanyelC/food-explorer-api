@@ -1,5 +1,5 @@
 const { UserCreateService } = require('../UserCreateService')
-const { UserRepositoryInMemory } = require('../../../repositories/UserRepositoryInMemory')
+const { UserRepositoryInMemory } = require('../../../repositories/users/UserRepositoryInMemory')
 const { AppError } = require('../../../utils/AppError')
 
 describe('UserCreateService', () => {

@@ -1,5 +1,5 @@
 const { FavoriteDeleteService } = require('../FavoriteDeleteService')
-const { FavoritesRepositoryInMemory } = require('../../../repositories/FavoritesRepositoryInMemory')
+const { FavoritesRepositoryInMemory } = require('../../../repositories/favorites/FavoritesRepositoryInMemory')
 const { AppError } = require('../../../utils/AppError')
 
 describe('FavoriteDeleteService', () => {

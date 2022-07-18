@@ -1,11 +1,11 @@
 const { AppError } = require('../../../utils/AppError')
-const { ProductCategoryCreateService } = require('../ProductCategoryCreateService')
-const { ProductCategoryRepositoryInMemory } = require('../../../repositories/ProductCategoryRepositoryInMemory')
+const { CategoryCreateService } = require('../CategoryCreateService')
+const { CategoryRepositoryInMemory } = require('../../../repositories/CategoryRepositoryInMemory')
 
-describe('ProductCategoryCreateService', () => {
+describe('CategoryCreateService', () => {
   let category
-  let productCategoryCreateService
-  let productCategoryRepositoryInMemory
+  let categoryCreateService
+  let categoryRepositoryInMemory
 
   beforeEach(() => {
     category = {
@@ -13,13 +13,13 @@ describe('ProductCategoryCreateService', () => {
       description: 'lorem ipsum description'
     }
 
-    productCategoryRepositoryInMemory = new ProductCategoryRepositoryInMemory()
-    productCategoryCreateService = new ProductCategoryCreateService(productCategoryRepositoryInMemory)
+    categoryRepositoryInMemory = new CategoryRepositoryInMemory()
+    categoryCreateService = new CategoryCreateService(categoryRepositoryInMemory)
 
   })
 
   it('Category should be created with valid data', async () => {
-    const categoryCreated = await productCategoryCreateService.execute(category)
+    const categoryCreated = await categoryCreateService.execute(category)
 
     expect(categoryCreated).toHaveProperty('id')
   })
@@ -27,7 +27,7 @@ describe('ProductCategoryCreateService', () => {
   it('Category should not be created without name', async () => {
     delete category.name
 
-    await expect(productCategoryCreateService.execute(category))
+    await expect(categoryCreateService.execute(category))
       .rejects
       .toEqual(new AppError('Nome da categoria é obrigatório.'))
   })
@@ -35,7 +35,7 @@ describe('ProductCategoryCreateService', () => {
   it('Category should not be created with invalid name => {}', async () => {
     category.name = {}
 
-    await expect(productCategoryCreateService.execute(category))
+    await expect(categoryCreateService.execute(category))
       .rejects
       .toEqual(new AppError('Nome da categoria deve ser um texto.'))
 
@@ -44,7 +44,7 @@ describe('ProductCategoryCreateService', () => {
   it('Category should not be created with invalid name => 1', async () => {
     category.name = 1
 
-    await expect(productCategoryCreateService.execute(category))
+    await expect(categoryCreateService.execute(category))
       .rejects
       .toEqual(new AppError('Nome da categoria deve ser um texto.'))
 
@@ -53,7 +53,7 @@ describe('ProductCategoryCreateService', () => {
   it('Category should not be created with invalid name => []', async () => {
     category.name = []
 
-    await expect(productCategoryCreateService.execute(category))
+    await expect(categoryCreateService.execute(category))
       .rejects
       .toEqual(new AppError('Nome da categoria deve ser um texto.'))
 
@@ -62,7 +62,7 @@ describe('ProductCategoryCreateService', () => {
   it('Category should not be created with invalid name => 51 character name', async () => {
     category.name = 'EyqfoWsWdMBzWaqk3mwQBudnIQttG9w3X6WqDITfasdfsdafasd'
 
-    await expect(productCategoryCreateService.execute(category))
+    await expect(categoryCreateService.execute(category))
       .rejects
       .toEqual(new AppError('Nome da categoria não deve ter mais que 50 caracteres.'))
 
@@ -73,9 +73,9 @@ describe('ProductCategoryCreateService', () => {
       name: 'foo'
     }
 
-    await productCategoryCreateService.execute(category)
+    await categoryCreateService.execute(category)
 
-    await expect(productCategoryCreateService.execute(newCategory))
+    await expect(categoryCreateService.execute(newCategory))
       .rejects
       .toEqual(new AppError('Já existe uma categoria com esse nome.'))
   })

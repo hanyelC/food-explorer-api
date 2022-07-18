@@ -5,13 +5,13 @@ class ProductCategoryCreateService {
     this.repository = repository
   }
 
-  execute({ name, description }) {
-    if (typeof name != 'string') {
-      throw new AppError('Nome da categoria deve ser um texto.')
-    }
-
+  async execute({ name, description }) {
     if (!name) {
       throw new AppError('Nome da categoria é obrigatório.')
+    }
+
+    if (typeof name != 'string') {
+      throw new AppError('Nome da categoria deve ser um texto.')
     }
 
     if (name.length > 50) {

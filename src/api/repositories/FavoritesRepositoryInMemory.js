@@ -36,7 +36,15 @@ class FavoritesRepositoryInMemory {
   }
 
   async delete(user_id, product_id) {
+    const id = Number('' + user_id + product_id)
 
+    const itemToDelete = this.favorites.find(fav => fav.id === id)
+
+    const indexToDelete = this.favorites.indexOf(itemToDelete)
+
+    const deletedItem = this.favorites.splice(indexToDelete, 1)[0]
+
+    return { id: deletedItem.id }
   }
 }
 

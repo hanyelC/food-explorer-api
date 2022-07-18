@@ -14,13 +14,13 @@ class ProductCategoryRepositoryInMemory {
   }
 
   async create({ name, description }) {
-    newCategory = {
+    const newCategory = {
       id: Math.floor(Math.random() * 1E9),
       name,
       description
     }
 
-    this.categories.push(category)
+    this.categories.push(newCategory)
 
     return newCategory
   }

@@ -85,6 +85,30 @@ describe('UserCreateService', () => {
       .toEqual(new AppError('A senha precisa ter no mínimo 6 caracteres.'))
   })
 
+  it('user should not be created with invalid password => 1', async () => {
+    user.password = 1
+
+    await expect(userCreateService.execute(user))
+      .rejects
+      .toEqual(new AppError('Senha inválida, a senha deve ser uma string.'))
+  })
+
+  it('user should not be created with invalid password => []', async () => {
+    user.password = []
+
+    await expect(userCreateService.execute(user))
+      .rejects
+      .toEqual(new AppError('Senha inválida, a senha deve ser uma string.'))
+  })
+
+  it('user should not be created with invalid password => {}', async () => {
+    user.password = {}
+
+    await expect(userCreateService.execute(user))
+      .rejects
+      .toEqual(new AppError('Senha inválida, a senha deve ser uma string.'))
+  })
+
   it('user should not be created with email that already exists', async () => {
     await userCreateService.execute(user)
 

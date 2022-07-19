@@ -27,6 +27,10 @@ class UserCreateService {
       throw new AppError('Formato de email inválido, formato exemplo: fulano@gmail.com')
     }
 
+    if (typeof password != 'string') {
+      throw new AppError('Senha inválida, a senha deve ser uma string.')
+    }
+
     if (password.length < 6) {
       throw new AppError('A senha precisa ter no mínimo 6 caracteres.')
     }

@@ -6,6 +6,16 @@ const port = process.env.PORT
 describe('Users E2E', () => {
   let user
 
+  let optionsFactory = (userData) => {
+    return {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }
+  }
+
   beforeEach(() => {
     user = {
       name: "Hanyel",
@@ -16,13 +26,7 @@ describe('Users E2E', () => {
   })
 
   test('POST /users - should return 201 and id', async () => {
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -33,13 +37,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.passwordConfirm
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -51,13 +49,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.password
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -69,13 +61,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.name
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -87,13 +73,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.email
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -105,13 +85,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.email = 'foo'
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -123,13 +97,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = 123
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -141,13 +109,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = []
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -159,13 +121,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = {}
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -177,13 +133,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = "123"
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -195,13 +145,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = "123abc"
 
-    const res = await fetch(`${baseUrl}:${port}/users`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
+    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 

@@ -1,7 +1,12 @@
 const { Router } = require('express')
+const { FavoriteController } = require('../controllers/FavoritesController')
 
 const favoritesRouter = Router()
 
-favoritesRouter.post('/', /*favorites controller*/)
+const favoriteController = new FavoriteController()
+
+favoritesRouter.get('/', favoriteController.index)
+favoritesRouter.post('/', favoriteController.create)
+favoritesRouter.delete('/', favoriteController.delete)
 
 module.exports = { favoritesRouter }

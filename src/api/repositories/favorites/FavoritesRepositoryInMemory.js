@@ -16,11 +16,13 @@ class FavoritesRepositoryInMemory {
   }
 
   async findByUserId(user_id) {
-
+    const favorites = this.favorites.filter(fav => fav.user_id === user_id)
+    return favorites
   }
 
   async findByProductId(product_id) {
-
+    const favorites = this.favorites.filter(fav => fav.product_id === product_id)
+    return favorites
   }
 
   async create(user_id, product_id) {

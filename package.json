@@ -33,10 +33,7 @@
       "test/*",
       "*.test.js",
       "docs/*"
-    ],
-    "execMap": {
-      "js": "node --inspect"
-    }
+    ]
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

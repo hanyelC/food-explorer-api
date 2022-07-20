@@ -44,6 +44,10 @@ class FavoritesRepositoryInMemory {
 
     const indexToDelete = this.favorites.indexOf(itemToDelete)
 
+    if (indexToDelete < -1) {
+      return
+    }
+
     const deletedItem = this.favorites.splice(indexToDelete, 1)[0]
 
     return { id: deletedItem.id }

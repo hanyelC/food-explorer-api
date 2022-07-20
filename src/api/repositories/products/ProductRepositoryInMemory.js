@@ -38,13 +38,13 @@ class ProductRepositoryInMemory {
   async delete(id) {
     const itemToDelete = this.products.find(prod => prod.id === id)
 
-    const indexToDelete = this.products.indexOf(itemToDelete)
-
-    if (indexToDelete < -1) {
-      return
+    if (itemToDelete === undefined) {
+      return { id: null }
     }
 
-    const deletedItem = this.favorites.splice(indexToDelete, 1)[0]
+    const indexToDelete = this.products.indexOf(itemToDelete)
+
+    const deletedItem = this.products.splice(indexToDelete, 1)[0]
 
     return { id: deletedItem.id }
 

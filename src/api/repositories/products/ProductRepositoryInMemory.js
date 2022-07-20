@@ -31,8 +31,20 @@ class ProductRepositoryInMemory {
     return { id: newProduct.id }
   }
 
-  async update({ name, description, price, image }) {
+  async update({ id, name, description, price, image }) {
+    this.products = this.products.map(prod => {
+      if (prod.id === id) {
+        return {
+          id,
+          name,
+          description,
+          price,
+          image
+        }
+      }
 
+      return prod
+    })
   }
 
   async delete(id) {

@@ -4,12 +4,14 @@ const { ProductRepositoryInMemory } = require('../../../repositories/products/Pr
 describe('ProductsListService', () => {
   let products = [
     {
+      id: 1,
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
       image: '00101101001010110101010101010101001011010101010010101010101010101'
     },
     {
+      id: 2,
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,

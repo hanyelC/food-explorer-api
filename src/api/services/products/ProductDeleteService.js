@@ -11,7 +11,7 @@ class ProductDeleteService {
     }
 
     if (typeof product_id != 'number') {
-      throw new AppError('Product id should be a number')
+      throw new AppError('Product id should be a number.')
     }
 
     const deletedItem = await this.repository.delete(product_id)

@@ -45,6 +45,8 @@ class ProductRepositoryInMemory {
 
       return prod
     })
+
+    return this.products.find(prod => prod.id = id)
   }
 
   async delete(id) {

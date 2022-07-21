@@ -31,24 +31,12 @@ describe('IngredientCreateService', () => {
       .toEqual(new AppError('Nome do ingrediente é obrigatório.'))
   })
 
-  it('Ingredient should not be created with invalid name => []', async () => {
-    ingredient.name = []
-
-    await expect(ingredientCreateService.execute(ingredient))
-      .rejects
-      .toEqual(new AppError('Nome do ingrediente deve ser um texto.'))
-  })
-
-  it('Ingredient should not be created with invalid name => {}', async () => {
-    ingredient.name = {}
-
-    await expect(ingredientCreateService.execute(ingredient))
-      .rejects
-      .toEqual(new AppError('Nome do ingrediente deve ser um texto.'))
-  })
-
-  it('Ingredient should not be created with invalid name => 1', async () => {
-    ingredient.name = 1
+  test.each([
+    { value: [] },
+    { value: {} },
+    { value: 1 }
+  ])('Ingredient should not be created with invalid name => $value', async ({ value }) => {
+    ingredient.name = value
 
     await expect(ingredientCreateService.execute(ingredient))
       .rejects

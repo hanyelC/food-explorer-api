@@ -12,32 +12,21 @@ describe('FavoritesListByUserIdService', () => {
 
   const favoritesListByUserIdService = new FavoritesListByUserIdService(favoritesRepositoryInMemory)
 
-  test('Should throw with invalid user_id => string', async () => {
-    await expect(favoritesListByUserIdService.execute('string'))
+  test.each([
+    { value: 'string' },
+    { value: [] },
+    { value: {} }
+  ])('Should throw with invalid user_id => $value', async ({ value }) => {
+    await expect(favoritesListByUserIdService.execute(value))
       .rejects
       .toEqual(new AppError('User id should be a number.'))
   })
 
-  test('Should throw with invalid user_id => []', async () => {
-    await expect(favoritesListByUserIdService.execute([]))
-      .rejects
-      .toEqual(new AppError('User id should be a number.'))
-  })
-
-  test('Should throw with invalid user_id => {}', async () => {
-    await expect(favoritesListByUserIdService.execute({}))
-      .rejects
-      .toEqual(new AppError('User id should be a number.'))
-  })
-
-  test('Should throw with invalid user_id => null', async () => {
-    await expect(favoritesListByUserIdService.execute(null))
-      .rejects
-      .toEqual(new AppError('User id is required.'))
-  })
-
-  test('Should throw with invalid user_id => undefined', async () => {
-    await expect(favoritesListByUserIdService.execute(undefined))
+  test.each([
+    { value: null },
+    { value: undefined }
+  ])('Should throw with invalid user_id => undefined', async ({ value }) => {
+    await expect(favoritesListByUserIdService.execute(value))
       .rejects
       .toEqual(new AppError('User id is required.'))
   })

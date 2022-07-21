@@ -48,20 +48,12 @@ describe('ProductDeleteService', () => {
       .toEqual(new AppError('Product id is required.'))
   })
 
-  test('Should throw an App error with invalid id => []', async () => {
-    await expect(productDeleteService.execute([]))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
-
-  test('Should throw an App error with invalid id => {}', async () => {
-    await expect(productDeleteService.execute({}))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
-
-  test('Should throw an App error with invalid id => string', async () => {
-    await expect(productDeleteService.execute('string'))
+  test.each([
+    { value: [] },
+    { value: {} },
+    { value: 'string' },
+  ])('Should throw an App error with invalid id => $value', async ({ value }) => {
+    await expect(productDeleteService.execute(value))
       .rejects
       .toEqual(new AppError('Product id should be a number.'))
   })
@@ -72,5 +64,4 @@ describe('ProductDeleteService', () => {
     expect(deletedItem).toHaveProperty('id')
     expect(deletedItem.id).toBe(null)
   })
-  
 })

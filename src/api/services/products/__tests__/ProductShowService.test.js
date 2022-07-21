@@ -45,20 +45,12 @@ describe('ProductShowService', () => {
       .toEqual(new AppError('Product id is required.'))
   })
 
-  test('Should throw with invalid id => string', async () => {
-    await expect(productShowService.execute('string'))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
-
-  test('Should throw with invalid id => []', async () => {
-    await expect(productShowService.execute([]))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
-
-  test('Should throw with invalid id => {}', async () => {
-    await expect(productShowService.execute({}))
+  test.each([
+    { value: [] },
+    { value: {} },
+    { value: 'string' },
+  ])('Should throw with invalid id => $value', async ({ value }) => {
+    await expect(productShowService.execute(value))
       .rejects
       .toEqual(new AppError('Product id should be a number.'))
   })

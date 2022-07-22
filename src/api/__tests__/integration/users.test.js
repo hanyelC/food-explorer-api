@@ -1,7 +1,4 @@
-require('dotenv').config()
-
-const baseUrl = process.env.LOCAL_URL
-const port = process.env.PORT
+const { baseUrlLocal, port } = require('../../../config/vars')
 
 describe('Users E2E', () => {
   let user
@@ -26,7 +23,7 @@ describe('Users E2E', () => {
   })
 
   test('POST /users - should return 201 and id', async () => {
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -37,7 +34,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.passwordConfirm
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -49,7 +46,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.password
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -61,7 +58,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.name
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -73,7 +70,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     delete user.email
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -85,7 +82,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.email = 'foo'
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -97,7 +94,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = 123
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -109,7 +106,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = []
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -121,7 +118,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = {}
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -133,7 +130,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = "123"
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 
@@ -145,7 +142,7 @@ describe('Users E2E', () => {
   test('POST /users - should return 400 and message', async () => {
     user.password = "123abc"
 
-    const res = await fetch(`${baseUrl}:${port}/users`, optionsFactory(user))
+    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
     const data = await res.json()
 

@@ -8,6 +8,10 @@ const { categoriesRouter } = require('./categories.routes')
 
 const routes = express.Router()
 
+routes.get('/ok', (req, res) => {
+  res.json({ ok: "" })
+})
+
 routes.use('/users', userRouter)
 routes.use('/products', productsRouter)
 routes.use('/favorites', favoritesRouter)

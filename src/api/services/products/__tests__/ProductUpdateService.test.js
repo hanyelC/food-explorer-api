@@ -110,8 +110,16 @@ describe('ProductUpdateService', () => {
   test('Product should not be updated to a name that already exists', async () => {
     newProductData.name = 'foo'
 
-    await await expect(productUpdateService.execute(newProductData))
+    await expect(productUpdateService.execute(newProductData))
       .rejects
       .toEqual(new AppError('Já existe um produto cadastrado com esse nome.'))
+  })
+
+  test('Product that not exists should not be updated', async () => {
+    newProductData.id = 10
+
+    await expect(productUpdateService.execute(newProductData))
+      .rejects
+      .toEqual(new AppError('Produto não encontrado.'))
   })
 })

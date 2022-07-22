@@ -9,7 +9,7 @@ const { categoriesRouter } = require('./categories.routes')
 const routes = express.Router()
 
 routes.get('/ok', (req, res) => {
-  res.json({ ok: "" })
+  res.json({ ok: "OK" })
 })
 
 routes.use('/users', userRouter)

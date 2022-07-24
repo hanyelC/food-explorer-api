@@ -2,14 +2,11 @@ const { CategoryRepositoryInMemory } = require('../repositories/categories/Categ
 const { CategoryCreateService } = require('../services/categories/CategoryCreateService')
 
 class CategoriesController {
-  constructor() {
-    this.repository = new CategoryRepositoryInMemory()
-  }
-
   async create(req, res) {
     const { name, description } = req.body
 
-    const categoryCreateService = new CategoryCreateService(this.repository)
+    const repository = new CategoryRepositoryInMemory()
+    const categoryCreateService = new CategoryCreateService(repository)
 
     const { id } = await categoryCreateService.execute({ name, description })
 

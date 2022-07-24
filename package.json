@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
+    "dev": "SET \"NODE_ENV=development\" && nodemon ./src/index.js",
     "test": "jest --watchAll",
     "prepare": "husky install",
     "debug": "nodemon --inspect ./src/index.js"
@@ -42,6 +42,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "pm2": "^5.2.0"
   },

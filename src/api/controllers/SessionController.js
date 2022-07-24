@@ -2,14 +2,11 @@ const { UserRepositoryInMemory } = require('../repositories/users/UserRepository
 const { SessionCreateService } = require('../services/sessions/SessionCreateService')
 
 class SessionController {
-  constructor() {
-    this.userRepository = new UserRepositoryInMemory()
-  }
-
   async create(req, res) {
     const { email, password } = req.body
 
-    const sessionCreateService = new SessionCreateService(this.userRepository)
+    const userRepository = new UserRepositoryInMemory()
+    const sessionCreateService = new SessionCreateService(userRepository)
 
     const { user, token } = await sessionCreateService.execute({ email, password })
 

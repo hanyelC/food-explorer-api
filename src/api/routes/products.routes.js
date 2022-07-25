@@ -1,15 +1,17 @@
 const { Router } = require('express')
 const { ProductsController } = require('../controllers/ProductsController')
+const { Auth } = require('../middlewares/auth')
 
 const productsRouter = Router()
 const productsController = new ProductsController()
+const auth = new Auth()
 
-// logged users only
+productsRouter.use(auth.ensureLogged)
 
 productsRouter.get('/', productsController.index)
 productsRouter.get('/:product_id', productsController.show)
 
-// admin only
+productsRouter.use(auth.ensureAdmin)
 
 productsRouter.post('/', productsController.create)
 productsRouter.put('/', productsController.update)

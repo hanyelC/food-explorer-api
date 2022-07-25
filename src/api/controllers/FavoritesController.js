@@ -4,9 +4,9 @@ const { FavoriteDeleteService } = require('../services/favorites/FavoriteDeleteS
 const { FavoritesListByUserIdService } = require('../services/favorites/FavoritesListByUserIdService')
 const { AppError } = require('../utils/AppError')
 
-class FavoriteController {
+class FavoritesController {
   async index(req, res) {
-    const { user_id } = req.body
+    const { user_id } = req.user
 
     const favoritesRepositoryInMemory = new FavoritesRepositoryInMemory()
     const favoritesListByUserIdService = new FavoritesListByUserIdService(favoritesRepositoryInMemory)
@@ -48,4 +48,4 @@ class FavoriteController {
   }
 }
 
-module.exports = { FavoriteController }
+module.exports = { FavoritesController }

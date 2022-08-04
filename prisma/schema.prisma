@@ -8,19 +8,71 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String
-  admin    Boolean @default(false)
-  password String
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  name      String
+  admin     Boolean    @default(false)
+  password  String
+  favorites Favorite[]
 
   @@map("users")
 }
 
 model Category {
-  id          Int    @id @default(autoincrement())
-  name        String @unique
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
   description String
+  products    ProductCategory[]
 
   @@map("categories")
+}
+
+model Product {
+  id          Int                 @id @default(autoincrement())
+  name        String              @unique
+  description String
+  price       Float
+  ingredients ProductIngredient[]
+  categories  ProductCategory[]
+  favorites   Favorite[]
+
+  @@map("products")
+}
+
+model Ingredient {
+  id       Int                 @id @default(autoincrement())
+  name     String              @unique
+  products ProductIngredient[]
+
+  @@map("ingredients")
+}
+
+model ProductIngredient {
+  fk_id_product    Int
+  product          Product    @relation(fields: [fk_id_product], references: [id])
+  fk_id_ingredient Int
+  ingredient       Ingredient @relation(fields: [fk_id_ingredient], references: [id])
+
+  @@id([fk_id_product, fk_id_ingredient])
+  @@map("product_ingredient")
+}
+
+model ProductCategory {
+  fk_id_product  Int
+  product        Product  @relation(fields: [fk_id_product], references: [id])
+  fk_id_category Int
+  category       Category @relation(fields: [fk_id_category], references: [id])
+
+  @@id([fk_id_product, fk_id_category])
+  @@map("product_category")
+}
+
+model Favorite {
+  fk_id_user    Int
+  user          User    @relation(fields: [fk_id_user], references: [id])
+  fk_id_product Int
+  product       Product @relation(fields: [fk_id_product], references: [id])
+
+  @@id([fk_id_user, fk_id_product])
+  @@map("favorites")
 }

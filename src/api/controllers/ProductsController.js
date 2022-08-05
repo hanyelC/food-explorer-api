@@ -1,4 +1,4 @@
-const { ProductRepositoryInMemory } = require('../repositories/products/ProductRepositoryInMemory')
+const { ProductRepository } = require('../repositories/products/ProductRepository')
 const { ProductCreateService } = require('../services/products/ProductCreateService')
 const { ProductDeleteService } = require('../services/products/ProductDeleteService')
 const { ProductsListService } = require('../services/products/ProductsListService')
@@ -6,9 +6,8 @@ const { ProductShowService } = require('../services/products/ProductShowService'
 const { ProductUpdateService } = require('../services/products/ProductUpdateService')
 
 class ProductsController {
-
   async index(req, res) {
-    const productRepository = new ProductRepositoryInMemory()
+    const productRepository = new ProductRepository()
     const productsListService = new ProductsListService(productRepository)
 
     const products = await productsListService.execute()
@@ -19,7 +18,7 @@ class ProductsController {
   async show(req, res) {
     const { product_id } = req.params
 
-    const productRepository = new ProductRepositoryInMemory()
+    const productRepository = new ProductRepository()
     const productShowService = new ProductShowService(productRepository)
 
     const product = await productShowService.execute(product_id)
@@ -30,7 +29,7 @@ class ProductsController {
   async create(req, res) {
     const { name, description, price, image } = req.body
 
-    const productRepository = new ProductRepositoryInMemory()
+    const productRepository = new ProductRepository()
     const productCreateService = new ProductCreateService(productRepository)
 
     const { id } = await productCreateService.execute({ name, description, price, image })
@@ -41,7 +40,7 @@ class ProductsController {
   async update(req, res) {
     const { id, name, description, price, image } = req.body
 
-    const productRepository = new ProductRepositoryInMemory()
+    const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 
     const { id: updatedProductId } = await productUpdateService.execute({ id, name, description, price, image })
@@ -53,7 +52,7 @@ class ProductsController {
   async delete(req, res) {
     const { product_id } = req.params
 
-    const productRepository = new ProductRepositoryInMemory()
+    const productRepository = new ProductRepository()
     const productDeleteService = new ProductDeleteService(productRepository)
 
     await productDeleteService.execute(product_id)

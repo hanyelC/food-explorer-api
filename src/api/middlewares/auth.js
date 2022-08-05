@@ -13,12 +13,11 @@ class Auth {
 
     const [, token] = authHeader.split(' ')
 
-
     try {
       const { sub } = verify(token, jwtSecret)
       const { user_id } = JSON.parse(sub)
 
-      req.user.user_id = user_id
+      req.user = { user_id }
 
       return next()
     } catch {

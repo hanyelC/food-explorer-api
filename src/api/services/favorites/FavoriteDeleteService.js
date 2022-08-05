@@ -14,9 +14,15 @@ class FavoriteDeleteService {
       throw new AppError('Product id is required.')
     }
 
-    const deletedFavorite = await this.repository.delete(user_id, product_id)
+    const favToDelete = await this.repository.findById(user_id, product_id)
 
-    return { id: deletedFavorite.id }
+    if (!favToDelete) {
+      return
+    }
+
+    await this.repository.delete(user_id, product_id)
+
+    return
   }
 }
 

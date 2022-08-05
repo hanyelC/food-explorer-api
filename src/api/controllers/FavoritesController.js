@@ -1,4 +1,5 @@
-const { FavoritesRepositoryInMemory } = require('../repositories/favorites/FavoritesRepositoryInMemory')
+const { FavoritesRepository } = require('../repositories/favorites/FavoritesRepository')
+const { ProductRepository } = require('../repositories/products/ProductRepository')
 const { FavoriteCreateService } = require('../services/favorites/FavoriteCreateService')
 const { FavoriteDeleteService } = require('../services/favorites/FavoriteDeleteService')
 const { FavoritesListByUserIdService } = require('../services/favorites/FavoritesListByUserIdService')
@@ -8,43 +9,43 @@ class FavoritesController {
   async index(req, res) {
     const { user_id } = req.user
 
-    const favoritesRepositoryInMemory = new FavoritesRepositoryInMemory()
-    const favoritesListByUserIdService = new FavoritesListByUserIdService(favoritesRepositoryInMemory)
+    const repository = new FavoritesRepository()
+    const favoritesListByUserIdService = new FavoritesListByUserIdService(repository)
 
     const favorites = await favoritesListByUserIdService.execute(user_id)
 
-    return res.json(favorites)
+    return res.status(200).json(favorites)
   }
 
   async create(req, res) {
-    if (!req.user) {
-      throw new AppError('Faça login novamente.')
-    }
     const { user_id } = req.user
     const { product_id } = req.body
 
-    const favoritesRepositoryInMemory = new FavoritesRepositoryInMemory()
-    const favoriteCreateService = new FavoriteCreateService(favoritesRepositoryInMemory)
+    const productRepository = new ProductRepository()
+    const product = await productRepository.findById(product_id)
 
-    const createdFavoriteId = await favoriteCreateService.execute({ user_id, product_id })
+    if (!product) {
+      throw new AppError('Invalid product')
+    }
 
-    return res.status(201).json(createdFavoriteId)
+    const repository = new FavoritesRepository()
+    const favoriteCreateService = new FavoriteCreateService(repository)
+
+    await favoriteCreateService.execute({ user_id, product_id })
+
+    return res.status(201).json()
   }
 
   async delete(req, res) {
-    if (!req.user) {
-      throw new AppError('Faça login novamente.')
-    }
-
     const { user_id } = req.user
     const { product_id } = req.body
 
-    const favoritesRepositoryInMemory = new FavoritesRepositoryInMemory()
-    const favoriteDeleteService = new FavoriteDeleteService(favoritesRepositoryInMemory)
+    const repository = new FavoritesRepository()
+    const favoriteDeleteService = new FavoriteDeleteService(repository)
 
-    const { id } = await favoriteDeleteService.execute({ user_id, product_id })
+    await favoriteDeleteService.execute({ user_id, product_id })
 
-    return res.status(200).json({ id })
+    return res.status(204).json()
   }
 }
 

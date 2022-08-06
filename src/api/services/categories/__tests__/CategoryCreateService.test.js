@@ -78,7 +78,8 @@ describe('CategoryCreateService', () => {
 
   it('Category should not be created with name that already exists', async () => {
     const newCategory = {
-      name: 'foo'
+      name: 'foo',
+      description: 'lorem ipsum'
     }
 
     await categoryCreateService.execute(category)

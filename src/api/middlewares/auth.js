@@ -36,21 +36,23 @@ class Auth {
 
     const [, token] = authHeader.split(' ')
 
+    let sub
+
     try {
-      const { sub } = verify(token, jwtSecret)
-      const { user_id, isAdmin } = JSON.parse(sub)
-
-      if (!isAdmin) {
-        throw new AppError('Access denied.', 403)
-      }
-
-      req.user.user_id = user_id
-
-      return next()
+      sub = verify(token, jwtSecret).sub
     } catch {
       throw new AppError('Token inválido.', 401)
     }
 
+    const { user_id, isAdmin } = JSON.parse(sub)
+
+    if (!isAdmin) {
+      throw new AppError('Access denied.', 403)
+    }
+
+    req.user = { user_id }
+
+    return next()
   }
 }
 

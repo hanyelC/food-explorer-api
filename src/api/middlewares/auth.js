@@ -23,8 +23,6 @@ class Auth {
     } catch {
       throw new AppError('Token inválido.', 401)
     }
-
-
   }
 
   async ensureAdmin(req, res, next) {

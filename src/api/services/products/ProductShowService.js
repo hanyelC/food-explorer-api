@@ -10,7 +10,9 @@ class ProductShowService {
       throw new AppError('Product id is required.')
     }
 
-    if (typeof product_id != 'number') {
+    product_id = Number(product_id)
+
+    if (typeof product_id != 'number' || isNaN(product_id) || product_id === 0) {
       throw new AppError('Product id should be a number.')
     }
 

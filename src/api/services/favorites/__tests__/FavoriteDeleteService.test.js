@@ -19,13 +19,6 @@ describe('FavoriteDeleteService', () => {
 
   })
 
-  it('Favorite should be deleted', async () => {
-    const { id } = await favoriteDeleteService.execute(favorite)
-
-    expect(id).toBe(11)
-
-  })
-
   it('Favorite should not be deleted without user id', async () => {
     delete favorite.user_id
 

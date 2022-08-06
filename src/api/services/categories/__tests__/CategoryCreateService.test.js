@@ -32,6 +32,14 @@ describe('CategoryCreateService', () => {
       .toEqual(new AppError('Nome da categoria é obrigatório.'))
   })
 
+  it('Category should not be created without description', async () => {
+    delete category.description
+
+    await expect(categoryCreateService.execute(category))
+      .rejects
+      .toEqual(new AppError('Descrição da categoria é obrigatória.'))
+  })
+
   it('Category should not be created with invalid name => {}', async () => {
     category.name = {}
 
@@ -70,7 +78,8 @@ describe('CategoryCreateService', () => {
 
   it('Category should not be created with name that already exists', async () => {
     const newCategory = {
-      name: 'foo'
+      name: 'foo',
+      description: 'lorem ipsum'
     }
 
     await categoryCreateService.execute(category)

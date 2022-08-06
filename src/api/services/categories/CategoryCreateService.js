@@ -18,6 +18,10 @@ class CategoryCreateService {
       throw new AppError('Nome da categoria não deve ter mais que 50 caracteres.')
     }
 
+    if (!description) {
+      throw new AppError('Descrição da categoria é obrigatória.')
+    }
+
     const categoryWithName = await this.repository.findByName(name)
 
     if (categoryWithName) {

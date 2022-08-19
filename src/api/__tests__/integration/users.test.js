@@ -22,14 +22,14 @@ describe('Users E2E', () => {
     }
   })
 
-  test('POST /users - should return 201 and id', async () => {
-    const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
+  // test('POST /users - should return 201 and id', async () => {
+  //   const res = await fetch(`${baseUrlLocal}:${port}/users`, optionsFactory(user))
 
-    const data = await res.json()
+  //   const data = await res.json()
 
-    expect(res.status).toBe(201)
-    expect(data).toHaveProperty('id')
-  })
+  //   expect(res.status).toBe(201)
+  //   expect(data).toHaveProperty('id')
+  // })
 
   test('POST /users - should return 400 and message', async () => {
     delete user.passwordConfirm

@@ -84,9 +84,9 @@ model Favorite {
 
 model Image {
   id         String       @id
-  imageData  Bytes
-  imageType  String
-  imageName  String
+  image_data Bytes
+  image_type String
+  image_name String
   Ingredient Ingredient[]
   Product    Product[]
 

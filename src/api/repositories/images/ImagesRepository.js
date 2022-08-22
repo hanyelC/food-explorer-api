@@ -1,5 +1,3 @@
-const { randomUUID } = require('crypto')
-
 const { prisma } = require('../../lib/prisma')
 
 class ImagesRepository {

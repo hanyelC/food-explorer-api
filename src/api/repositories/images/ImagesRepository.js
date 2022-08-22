@@ -9,9 +9,9 @@ class ImagesRepository {
     const image = await prisma.image.create({
       data: {
         id,
-        imageData: image_buffer,
-        imageName: image_name,
-        imageType: image_type
+        image_data: image_buffer,
+        image_name: image_name,
+        image_type: image_type
       }
     })
 

@@ -25,7 +25,11 @@ class ImagesRepository {
   }
 
   async delete(id) {
-
+    await prisma.image.delete({
+      where: {
+        id
+      }
+    })
   }
 }
 

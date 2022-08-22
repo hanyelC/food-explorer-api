@@ -21,7 +21,43 @@ class ImagesController {
       image_type: mimetype
     })
 
-    res.status(201).json({ image_id: data.id })
+    const diskStorage = new DiskStorage()
+
+    await diskStorage.deleteTempFile(filename)
+
+    res.status(201).json({ image_name: data.image_name })
+  }
+
+  async show(req, res) {
+    const { image_name } = req.params
+
+    let fileExists
+
+    try {
+      await fs.promises.access(path.resolve(UPLOADS_FOLDER, image_name))
+      fileExists = true
+    } catch {
+      fileExists = false
+    }
+
+    if (fileExists) {
+      return res.redirect(`/files/${image_name}`)
+    }
+
+    const repository = new ImagesRepository()
+
+    const id = image_name.split('.')[0]
+
+    const image = await repository.findById(id)
+
+    if (!image) {
+      return res.status(404).json({ message: "Image not found" })
+    }
+
+    const diskStorage = new DiskStorage()
+    diskStorage.saveFile(image.image_data, image_name)
+
+    return res.redirect(`/files/${image_name}`)
   }
 }
 

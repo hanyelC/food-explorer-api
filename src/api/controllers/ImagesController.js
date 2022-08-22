@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const { randomUUID } = require('crypto')
 
 const { ImagesRepository } = require('../repositories/images/ImagesRepository')
 
@@ -15,7 +14,7 @@ class ImagesController {
 
     const repository = new ImagesRepository()
     const data = await repository.create({
-      id: randomUUID(),
+      id: filename.split('.')[0],
       image_buffer: buffer,
       image_name: filename,
       image_type: mimetype

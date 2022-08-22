@@ -1,8 +1,14 @@
 const { prisma } = require('../../lib/prisma')
 
 class ImagesRepository {
-  async findById(uuid) {
+  async findById(id) {
+    const image = await prisma.image.findUnique({
+      where: {
+        id
+      }
+    })
 
+    return image
   }
 
   async create({ id, image_buffer, image_type, image_name }) {
@@ -18,7 +24,7 @@ class ImagesRepository {
     return image
   }
 
-  async delete(uuid) {
+  async delete(id) {
 
   }
 }

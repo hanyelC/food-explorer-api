@@ -1,5 +1,7 @@
 const express = require('express')
 
+const { UPLOADS_FOLDER } = require('../../config/upload')
+
 const { userRouter } = require('./users.routes')
 const { productsRouter } = require('./products.routes')
 const { favoritesRouter } = require('./favorites.routes')
@@ -13,6 +15,8 @@ const routes = express.Router()
 routes.get('/', (req, res) => {
   return res.json({ message: "Food explorer API" })
 })
+
+routes.use('/files', express.static(UPLOADS_FOLDER))
 
 routes.use('/session', sessionsRouter)
 routes.use('/users', userRouter)

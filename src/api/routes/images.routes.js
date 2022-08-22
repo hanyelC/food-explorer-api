@@ -13,6 +13,12 @@ const upload = multer(multer_configs)
 
 imagesRouter.use(auth.ensureLogged)
 
-imagesRouter.patch('/', upload.single('image'), imagesController.create)
+imagesRouter.get('/:image_name', imagesController.show)
+
+imagesRouter.use(auth.ensureAdmin)
+
+imagesRouter.use(upload.single('image'))
+
+imagesRouter.patch('/', imagesController.create)
 
 module.exports = { imagesRouter }

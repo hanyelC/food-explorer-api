@@ -10,8 +10,8 @@ const { imagesRouter } = require('./images.routes')
 
 const routes = express.Router()
 
-routes.get('/ok', (req, res) => {
-  res.json({ ok: "OK" })
+routes.get('/', (req, res) => {
+  return res.json({ message: "Food explorer API" })
 })
 
 routes.use('/session', sessionsRouter)

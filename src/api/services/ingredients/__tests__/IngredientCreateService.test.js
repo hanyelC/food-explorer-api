@@ -10,7 +10,7 @@ describe('IngredientCreateService', () => {
   beforeEach(() => {
     ingredient = {
       name: 'foo',
-      image: '0101010101100101010'
+      image_id: '0101010101100101010'
     }
 
     ingredientsRepositoryInMemory = new IngredientsRepositoryInMemory()
@@ -52,7 +52,7 @@ describe('IngredientCreateService', () => {
   })
 
   it('Ingredient should not be created without image', async () => {
-    delete ingredient.image
+    delete ingredient.image_id
 
     await expect(ingredientCreateService.execute(ingredient))
       .rejects

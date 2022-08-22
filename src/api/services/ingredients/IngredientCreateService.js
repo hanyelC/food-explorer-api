@@ -5,7 +5,7 @@ class IngredientCreateService {
     this.repository = repository
   }
 
-  async execute({ name, image }) {
+  async execute({ name, image_id }) {
     if (!name) {
       throw new AppError('Nome do ingrediente é obrigatório.')
     }
@@ -14,7 +14,7 @@ class IngredientCreateService {
       throw new AppError('Nome do ingrediente deve ser um texto.')
     }
 
-    if (!image) {
+    if (!image_id) {
       throw new AppError('Imagem do ingrediente é obrigatória.')
     }
 
@@ -24,7 +24,7 @@ class IngredientCreateService {
       throw new AppError('Já existe um ingrediente cadastrado com esse nome.')
     }
 
-    const ingredientCreatedId = await this.repository.create({ name, image })
+    const ingredientCreatedId = await this.repository.create({ name, image_id })
 
     return ingredientCreatedId
   }

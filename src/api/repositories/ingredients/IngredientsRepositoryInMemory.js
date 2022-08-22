@@ -17,11 +17,11 @@ class IngredientsRepositoryInMemory {
     return ingredient
   }
 
-  async create({ name, image }) {
+  async create({ name, image_id }) {
     const newIngredient = {
       id: Math.floor(Math.random() * 1E9),
       name,
-      image
+      image_id
     }
 
     this.ingredients.push(newIngredient)

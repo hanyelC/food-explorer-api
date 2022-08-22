@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
 }
 
 datasource db {
@@ -32,6 +33,8 @@ model Product {
   name        String              @unique
   description String
   price       Float
+  image_id    String
+  image       Image               @relation(fields: [image_id], references: [id])
   ingredients ProductIngredient[]
   categories  ProductCategory[]
   favorites   Favorite[]
@@ -43,15 +46,17 @@ model Ingredient {
   id       Int                 @id @default(autoincrement())
   name     String              @unique
   products ProductIngredient[]
+  image_id String
+  image    Image               @relation(fields: [image_id], references: [id])
 
   @@map("ingredients")
 }
 
 model ProductIngredient {
   fk_id_product    Int
-  product          Product    @relation(fields: [fk_id_product], references: [id])
+  product          Product    @relation(fields: [fk_id_product], references: [id], onDelete: Cascade)
   fk_id_ingredient Int
-  ingredient       Ingredient @relation(fields: [fk_id_ingredient], references: [id])
+  ingredient       Ingredient @relation(fields: [fk_id_ingredient], references: [id], onDelete: Cascade)
 
   @@id([fk_id_product, fk_id_ingredient])
   @@map("product_ingredient")
@@ -59,9 +64,9 @@ model ProductIngredient {
 
 model ProductCategory {
   fk_id_product  Int
-  product        Product  @relation(fields: [fk_id_product], references: [id])
+  product        Product  @relation(fields: [fk_id_product], references: [id], onDelete: Cascade)
   fk_id_category Int
-  category       Category @relation(fields: [fk_id_category], references: [id])
+  category       Category @relation(fields: [fk_id_category], references: [id], onDelete: Cascade)
 
   @@id([fk_id_product, fk_id_category])
   @@map("product_category")
@@ -69,10 +74,21 @@ model ProductCategory {
 
 model Favorite {
   fk_id_user    Int
-  user          User    @relation(fields: [fk_id_user], references: [id])
+  user          User    @relation(fields: [fk_id_user], references: [id], onDelete: Cascade)
   fk_id_product Int
-  product       Product @relation(fields: [fk_id_product], references: [id])
+  product       Product @relation(fields: [fk_id_product], references: [id], onDelete: Cascade)
 
   @@id([fk_id_user, fk_id_product])
   @@map("favorites")
+}
+
+model Image {
+  id         String       @id
+  image_data Bytes
+  image_type String
+  image_name String
+  Ingredient Ingredient[]
+  Product    Product[]
+
+  @@map("images")
 }

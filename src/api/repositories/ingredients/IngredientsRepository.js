@@ -27,11 +27,11 @@ class IngredientsRepository {
     return ingredient
   }
 
-  async create({ name, image }) {
+  async create({ name, image_id }) {
     const newIngredient = await prisma.ingredient.create({
       data: {
         name,
-        //image
+        image_id
       }
     })
 

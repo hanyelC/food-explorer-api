@@ -110,6 +110,17 @@ class ProductRepository {
 
     return { id: deletedProduct.id }
   }
+
+  async addCategory(product_id, category_id) {
+    const relation = await prisma.productCategory.create({
+      data: {
+        fk_id_category: category_id,
+        fk_id_product: product_id
+      }
+    })
+
+    return relation
+  }
 }
 
 module.exports = { ProductRepository }

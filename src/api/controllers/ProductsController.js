@@ -27,26 +27,25 @@ class ProductsController {
   }
 
   async create(req, res) {
-    const { name, description, price, image } = req.body
+    const { name, description, price, image_id } = req.body
 
     const productRepository = new ProductRepository()
     const productCreateService = new ProductCreateService(productRepository)
 
-    const { id } = await productCreateService.execute({ name, description, price, image })
+    const { id } = await productCreateService.execute({ name, description, price, image_id })
 
     return res.status(201).json({ id })
   }
 
   async update(req, res) {
-    const { id, name, description, price, image } = req.body
+    const { id, name, description, price, image_id } = req.body
 
     const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 
-    const { id: updatedProductId } = await productUpdateService.execute({ id, name, description, price, image })
+    const { id: updatedProductId } = await productUpdateService.execute({ id, name, description, price, image_id })
 
     return res.json({ id: updatedProductId })
-
   }
 
   async delete(req, res) {

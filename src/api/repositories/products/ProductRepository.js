@@ -4,6 +4,47 @@ class ProductRepository {
 
   async index() {
     const products = await prisma.product.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        image: {
+          select: {
+            id: true,
+            image_name: true,
+            image_type: true
+          }
+        },
+        ingredients: {
+          select: {
+            ingredient: {
+              select: {
+                id: true,
+                name: true,
+                image: {
+                  select: {
+                    id: true,
+                    image_name: true,
+                    image_type: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        categories: {
+          select: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+                description: true
+              }
+            }
+          }
+        },
+      },
       orderBy: {
         id: 'asc'
       }

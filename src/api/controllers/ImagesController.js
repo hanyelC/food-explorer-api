@@ -24,7 +24,7 @@ class ImagesController {
 
     await diskStorage.deleteTempFile(filename)
 
-    res.status(201).json({ image_name: data.image_name })
+    res.status(201).json({ image_name: data.image_name, image_id: data.id })
   }
 
   async show(req, res) {

@@ -10,7 +10,7 @@ class IngredientsController {
 
     const { id } = await ingredientCreateService.execute({ name, image_id })
 
-    return res.json(id)
+    return res.json({ id })
   }
 }
 

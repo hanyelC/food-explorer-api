@@ -5,7 +5,7 @@ class ProductUpdateService {
     this.repository = repository
   }
 
-  async execute({ id, name, description, price, image }) {
+  async execute({ id, name, description, price, image_id }) {
     if (!id) {
       throw new AppError('Id do produto é obrigatório.')
     }
@@ -44,7 +44,7 @@ class ProductUpdateService {
       throw new AppError('Preço do produto deve ser um número.')
     }
 
-    if (!image) {
+    if (!image_id) {
       throw new AppError('Imagem do produto é obrigatória.')
     }
 
@@ -54,7 +54,7 @@ class ProductUpdateService {
       throw new AppError('Já existe um produto cadastrado com esse nome.')
     }
 
-    const prod = await this.repository.update({ id, name, description, price, image })
+    const prod = await this.repository.update({ id, name, description, price, image_id })
 
     return prod
   }

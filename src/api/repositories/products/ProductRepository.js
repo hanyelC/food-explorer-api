@@ -4,6 +4,47 @@ class ProductRepository {
 
   async index() {
     const products = await prisma.product.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        image: {
+          select: {
+            id: true,
+            image_name: true,
+            image_type: true
+          }
+        },
+        ingredients: {
+          select: {
+            ingredient: {
+              select: {
+                id: true,
+                name: true,
+                image: {
+                  select: {
+                    id: true,
+                    image_name: true,
+                    image_type: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        categories: {
+          select: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+                description: true
+              }
+            }
+          }
+        },
+      },
       orderBy: {
         id: 'asc'
       }
@@ -13,6 +54,47 @@ class ProductRepository {
 
   async findById(id) {
     const product = await prisma.product.findFirst({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        image: {
+          select: {
+            id: true,
+            image_name: true,
+            image_type: true
+          }
+        },
+        ingredients: {
+          select: {
+            ingredient: {
+              select: {
+                id: true,
+                name: true,
+                image: {
+                  select: {
+                    id: true,
+                    image_name: true,
+                    image_type: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        categories: {
+          select: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+                description: true
+              }
+            }
+          }
+        },
+      },
       where: {
         id
       }
@@ -31,20 +113,20 @@ class ProductRepository {
     return product
   }
 
-  async create({ name, description, price, image }) {
+  async create({ name, description, price, image_id }) {
     const newProduct = await prisma.product.create({
       data: {
         name,
         description,
         price,
-        // image, 
+        image_id
       }
     })
 
     return { id: newProduct.id }
   }
 
-  async update({ id, name, description, price, image }) {
+  async update({ id, name, description, price, image_id }) {
     const product = await prisma.product.update({
       where: {
         id
@@ -53,7 +135,7 @@ class ProductRepository {
         name,
         description,
         price,
-        image
+        image_id
       }
     })
 
@@ -68,7 +150,17 @@ class ProductRepository {
     })
 
     return { id: deletedProduct.id }
+  }
 
+  async addCategory(product_id, category_id) {
+    const relation = await prisma.productCategory.create({
+      data: {
+        fk_id_category: category_id,
+        fk_id_product: product_id
+      }
+    })
+
+    return relation
   }
 }
 

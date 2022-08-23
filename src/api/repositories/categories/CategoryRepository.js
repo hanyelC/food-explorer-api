@@ -11,6 +11,16 @@ class CategoryRepository {
     return category
   }
 
+  async findById(id) {
+    const category = await prisma.category.findFirst({
+      where: {
+        id
+      }
+    })
+
+    return category
+  }
+
   async create({ name, description }) {
     const newCategory = await prisma.category.create({
       data: {

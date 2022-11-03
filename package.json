@@ -50,6 +50,9 @@
     "pg": "^8.7.3",
     "pm2": "^5.2.0"
   },
+  "prisma": {
+    "seed": "node ./prisma/database/seed.js"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

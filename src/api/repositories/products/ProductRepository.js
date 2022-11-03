@@ -1,7 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+const { prisma } = require("../../lib/prisma");
 
 class ProductRepository {
-
   async index() {
     const products = await prisma.product.findMany({
       select: {
@@ -49,7 +48,7 @@ class ProductRepository {
         id: 'asc'
       }
     })
-    return products
+    return products;
   }
 
   async findById(id) {
@@ -63,8 +62,8 @@ class ProductRepository {
           select: {
             id: true,
             image_name: true,
-            image_type: true
-          }
+            image_type: true,
+          },
         },
         ingredients: {
           select: {
@@ -76,12 +75,12 @@ class ProductRepository {
                   select: {
                     id: true,
                     image_name: true,
-                    image_type: true
-                  }
-                }
-              }
-            }
-          }
+                    image_type: true,
+                  },
+                },
+              },
+            },
+          },
         },
         categories: {
           select: {
@@ -89,28 +88,28 @@ class ProductRepository {
               select: {
                 id: true,
                 name: true,
-                description: true
-              }
-            }
-          }
+                description: true,
+              },
+            },
+          },
         },
       },
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
 
-    return product
+    return product;
   }
 
   async findByName(name) {
     const product = await prisma.product.findFirst({
       where: {
-        name
-      }
-    })
+        name,
+      },
+    });
 
-    return product
+    return product;
   }
 
   async create({ name, description, price, image_id }) {
@@ -119,49 +118,49 @@ class ProductRepository {
         name,
         description,
         price,
-        image_id
-      }
-    })
+        image_id,
+      },
+    });
 
-    return { id: newProduct.id }
+    return { id: newProduct.id };
   }
 
   async update({ id, name, description, price, image_id }) {
     const product = await prisma.product.update({
       where: {
-        id
+        id,
       },
       data: {
         name,
         description,
         price,
-        image_id
-      }
-    })
+        image_id,
+      },
+    });
 
-    return product
+    return product;
   }
 
   async delete(id) {
     const deletedProduct = await prisma.product.delete({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
 
-    return { id: deletedProduct.id }
+    return { id: deletedProduct.id };
   }
 
   async addCategory(product_id, category_id) {
     const relation = await prisma.productCategory.create({
       data: {
         fk_id_category: category_id,
-        fk_id_product: product_id
-      }
-    })
+        fk_id_product: product_id,
+      },
+    });
 
-    return relation
+    return relation;
   }
 }
 
-module.exports = { ProductRepository }
+module.exports = { ProductRepository };

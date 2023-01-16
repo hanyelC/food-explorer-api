@@ -30,6 +30,14 @@ class DiskStorage {
 
     await fs.promises.unlink(filePath)
   }
+
+  async getTempFile(filename) {
+    const buffer = await fs.promises.readFile(
+      path.resolve(TMP_FOLDER, filename)
+    )
+
+    return { buffer }
+  }
 }
 
 module.exports = { DiskStorage }

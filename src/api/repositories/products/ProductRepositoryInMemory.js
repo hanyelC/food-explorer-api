@@ -17,13 +17,13 @@ class ProductRepositoryInMemory {
     return product
   }
 
-  async create({ name, description, price, image }) {
+  async create({ name, description, price, image_id }) {
     const newProduct = {
       id: Math.floor(Math.random() * 1E9),
       name,
       description,
       price,
-      image
+      image_id
     }
 
     this.products.push(newProduct)
@@ -31,7 +31,7 @@ class ProductRepositoryInMemory {
     return { id: newProduct.id }
   }
 
-  async update({ id, name, description, price, image }) {
+  async update({ id, name, description, price, image_id }) {
     this.products = this.products.map(prod => {
       if (prod.id === id) {
         return {
@@ -39,7 +39,7 @@ class ProductRepositoryInMemory {
           name,
           description,
           price,
-          image
+          image_id
         }
       }
 

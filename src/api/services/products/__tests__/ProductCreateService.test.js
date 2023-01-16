@@ -12,7 +12,7 @@ describe('ProductCreateService', () => {
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
     }
 
     productRepositoryInMemory = new ProductRepositoryInMemory()
@@ -51,7 +51,7 @@ describe('ProductCreateService', () => {
   })
 
   it('Product should not be created without image', async () => {
-    delete product.image
+    delete product.image_id
 
     await expect(productCreateService.execute(product))
       .rejects

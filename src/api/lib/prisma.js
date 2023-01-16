@@ -1,6 +1,9 @@
 const { env } = require('../../config/vars')
 const { PrismaClient } = require('@prisma/client')
 
+/**
+ * @type { PrismaClient }
+ */
 let prisma
 
 if (env === 'production') {

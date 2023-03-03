@@ -1,4 +1,4 @@
-import * as jsonwebtoken from 'jsonwebtoken'
+import { default as jsonwebtoken } from 'jsonwebtoken'
 import { default as bcryptjs } from 'bcryptjs'
 import { jwtSecret, jwtExpirationInterval } from '../../../config/vars.js'
 import { AppError } from '../../utils/AppError.js'

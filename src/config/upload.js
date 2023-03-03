@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import multer from 'multer'
 import { randomUUID } from 'node:crypto'
 import { AppError } from '../api/utils/AppError.js'

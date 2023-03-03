@@ -1,4 +1,4 @@
-const { baseUrlLocal, port } = require('../../../config/vars')
+import { baseUrlLocal, port } from '../../../config/vars.js'
 
 describe('Users E2E', () => {
   let user

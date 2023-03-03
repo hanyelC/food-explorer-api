@@ -1,6 +1,6 @@
-const { port } = require('./config/vars')
-require('express-async-errors')
+import { port } from './config/vars.js'
+import 'express-async-errors'
 
-const app = require('./config/express')
+import { app } from './config/express.js'
 
 app.listen(port || 3030, () => console.log('server started on port ', port || 3030))

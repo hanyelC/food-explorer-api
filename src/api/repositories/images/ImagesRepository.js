@@ -1,6 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+import { prisma } from '../../lib/prisma.js'
 
-class ImagesRepository {
+export class ImagesRepository {
   async findById(id) {
     const image = await prisma.image.findUnique({
       where: {
@@ -32,5 +32,3 @@ class ImagesRepository {
     })
   }
 }
-
-module.exports = { ImagesRepository }

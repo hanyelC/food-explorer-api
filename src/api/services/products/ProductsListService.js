@@ -1,4 +1,4 @@
-class ProductsListService {
+export class ProductsListService {
   constructor(repository) {
     this.repository = repository
   }
@@ -9,5 +9,3 @@ class ProductsListService {
     return products
   }
 }
-
-module.exports = { ProductsListService }

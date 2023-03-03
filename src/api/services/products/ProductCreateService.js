@@ -1,6 +1,6 @@
-const { AppError } = require('../../utils/AppError')
+import { AppError } from '../../utils/AppError.js'
 
-class ProductCreateService {
+export class ProductCreateService {
   constructor(repository) {
     this.repository = repository
   }
@@ -33,5 +33,3 @@ class ProductCreateService {
     return productCreatedId
   }
 }
-
-module.exports = { ProductCreateService }

@@ -1,6 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+import { prisma } from '../../lib/prisma.js'
 
-class CategoryRepository {
+export class CategoryRepository {
   async findByName(name) {
     const category = await prisma.category.findFirst({
       where: {
@@ -32,5 +32,3 @@ class CategoryRepository {
     return newCategory
   }
 }
-
-module.exports = { CategoryRepository }

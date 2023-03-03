@@ -1,4 +1,4 @@
-class CategoryRepositoryInMemory {
+export class CategoryRepositoryInMemory {
   constructor(categories = []) {
     this.categories = categories
   }
@@ -39,5 +39,3 @@ class CategoryRepositoryInMemory {
     })
   }
 }
-
-module.exports = { CategoryRepositoryInMemory }

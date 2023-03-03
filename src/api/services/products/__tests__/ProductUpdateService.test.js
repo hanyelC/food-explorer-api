@@ -1,6 +1,6 @@
-const { ProductUpdateService } = require('../ProductUpdateService')
-const { ProductRepositoryInMemory } = require('../../../repositories/products/ProductRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { ProductUpdateService } from '../ProductUpdateService.js'
+import { ProductRepositoryInMemory } from '../../../repositories/products/ProductRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('ProductUpdateService', () => {
   let newProductData
@@ -12,14 +12,14 @@ describe('ProductUpdateService', () => {
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
     },
     {
       id: 2,
       name: 'foo',
       description: 'lorem ipsum',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
     }
   ]
 
@@ -29,7 +29,7 @@ describe('ProductUpdateService', () => {
       name: 'foo baz',
       description: 'another',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
     }
     productRepositoryInMemory = new ProductRepositoryInMemory(products)
     productUpdateService = new ProductUpdateService(productRepositoryInMemory)
@@ -46,7 +46,7 @@ describe('ProductUpdateService', () => {
     { item: 'name', errorMessage: 'Nome do produto é obrigatório.' },
     { item: 'description', errorMessage: 'Descrição do produto é obrigatória.' },
     { item: 'price', errorMessage: 'Preço do produto é obrigatório.' },
-    { item: 'image', errorMessage: 'Imagem do produto é obrigatória.' },
+    { item: 'image_id', errorMessage: 'Imagem do produto é obrigatória.' },
   ])('Product should not be updated without $item', async ({ item, errorMessage }) => {
     delete newProductData[item]
 

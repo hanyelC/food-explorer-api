@@ -1,6 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+import { prisma } from '../../lib/prisma.js'
 
-class FavoritesRepository {
+export class FavoritesRepository {
   async index() {
     const favorites = await prisma.favorite.findMany()
 
@@ -81,5 +81,3 @@ class FavoritesRepository {
     return { id: deletedItem.id }
   }
 }
-
-module.exports = { FavoritesRepository }

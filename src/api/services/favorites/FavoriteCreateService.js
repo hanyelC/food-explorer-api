@@ -1,6 +1,6 @@
-const { AppError } = require("../../utils/AppError")
+import { AppError } from '../../utils/AppError.js'
 
-class FavoriteCreateService {
+export class FavoriteCreateService {
   constructor(repository) {
     this.repository = repository
   }
@@ -25,5 +25,3 @@ class FavoriteCreateService {
     return { id: favoriteCreatedId.id }
   }
 }
-
-module.exports = { FavoriteCreateService }

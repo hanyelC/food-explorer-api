@@ -1,7 +1,10 @@
-const { env } = require('../../config/vars')
-const { PrismaClient } = require('@prisma/client')
+import { env } from '../../config/vars.js'
+import { PrismaClient } from '@prisma/client'
 
-let prisma
+/**
+ * @type { PrismaClient }
+ */
+export let prisma
 
 if (env === 'production') {
   prisma = new PrismaClient()
@@ -12,5 +15,3 @@ if (env === 'production') {
 
   prisma = global.prisma
 }
-
-module.exports = { prisma }

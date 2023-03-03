@@ -1,6 +1,6 @@
-const { FavoritesListByUserIdService } = require('../FavoritesListByUserIdService')
-const { FavoritesRepositoryInMemory } = require('../../../repositories/favorites/FavoritesRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { FavoritesListByUserIdService } from '../FavoritesListByUserIdService.js'
+import { FavoritesRepositoryInMemory } from '../../../repositories/favorites/FavoritesRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('FavoritesListByUserIdService', () => {
   const favoritesRepositoryInMemory = new FavoritesRepositoryInMemory(

@@ -1,12 +1,12 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'node:fs'
+import path from 'node:path'
 
-const { ImagesRepository } = require('../repositories/images/ImagesRepository')
+import { ImagesRepository } from '../repositories/images/ImagesRepository.js'
 
-const { TMP_FOLDER, UPLOADS_FOLDER } = require('../../config/upload')
-const { DiskStorage } = require('../../providers/DiskStorage')
+import { TMP_FOLDER, UPLOADS_FOLDER } from '../../config/upload.js'
+import { DiskStorage } from '../../providers/DiskStorage.js'
 
-class ImagesController {
+export class ImagesController {
   async create(req, res) {
     const { filename, mimetype } = req.file
 
@@ -59,5 +59,3 @@ class ImagesController {
     return res.redirect(`/files/${image_name}`)
   }
 }
-
-module.exports = { ImagesController }

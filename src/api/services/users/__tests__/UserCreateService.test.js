@@ -1,6 +1,6 @@
-const { UserCreateService } = require('../UserCreateService')
-const { UserRepositoryInMemory } = require('../../../repositories/users/UserRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { UserCreateService } from '../UserCreateService.js'
+import { UserRepositoryInMemory } from '../../../repositories/users/UserRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('UserCreateService', () => {
   let userCreateService

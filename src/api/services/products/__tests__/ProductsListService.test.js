@@ -1,5 +1,5 @@
-const { ProductsListService } = require('../ProductsListService')
-const { ProductRepositoryInMemory } = require('../../../repositories/products/ProductRepositoryInMemory')
+import { ProductsListService } from '../ProductsListService.js'
+import { ProductRepositoryInMemory } from '../../../repositories/products/ProductRepositoryInMemory.js'
 
 describe('ProductsListService', () => {
   let products = [

@@ -1,6 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+import { prisma } from '../../lib/prisma.js'
 
-class UserRepository {
+export class UserRepository {
 
   async findByEmail(email) {
     const user = await prisma.user.findFirst({
@@ -24,5 +24,3 @@ class UserRepository {
     return newUser
   }
 }
-
-module.exports = { UserRepository }

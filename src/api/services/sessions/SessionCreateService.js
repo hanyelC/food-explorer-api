@@ -1,9 +1,12 @@
-const { sign } = require('jsonwebtoken')
-const { compareSync } = require('bcryptjs')
-const { jwtSecret, jwtExpirationInterval } = require('../../../config/vars')
-const { AppError } = require('../../utils/AppError')
+import * as jsonwebtoken from 'jsonwebtoken'
+import { default as bcryptjs } from 'bcryptjs'
+import { jwtSecret, jwtExpirationInterval } from '../../../config/vars.js'
+import { AppError } from '../../utils/AppError.js'
 
-class SessionCreateService {
+const { compareSync } = bcryptjs
+const { sign } = jsonwebtoken
+
+export class SessionCreateService {
   constructor(usersRepository) {
     this.repository = usersRepository
   }
@@ -45,5 +48,3 @@ class SessionCreateService {
 
   }
 }
-
-module.exports = { SessionCreateService }

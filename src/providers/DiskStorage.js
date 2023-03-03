@@ -1,8 +1,8 @@
-const fs = require('fs')
-const path = require('path')
-const { TMP_FOLDER, UPLOADS_FOLDER } = require('../config/upload')
+import fs from 'node:fs'
+import path from 'node:path'
+import { TMP_FOLDER, UPLOADS_FOLDER } from '../config/upload.js'
 
-class DiskStorage {
+export class DiskStorage {
   async deleteTempFile(filename) {
     const filePath = path.resolve(TMP_FOLDER, filename)
 
@@ -30,6 +30,12 @@ class DiskStorage {
 
     await fs.promises.unlink(filePath)
   }
-}
 
-module.exports = { DiskStorage }
+  async getTempFile(filename) {
+    const buffer = await fs.promises.readFile(
+      path.resolve(TMP_FOLDER, filename)
+    )
+
+    return { buffer }
+  }
+}

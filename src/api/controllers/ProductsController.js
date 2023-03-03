@@ -1,11 +1,13 @@
-const { ProductRepository } = require('../repositories/products/ProductRepository')
-const { ProductCreateService } = require('../services/products/ProductCreateService')
-const { ProductDeleteService } = require('../services/products/ProductDeleteService')
-const { ProductsListService } = require('../services/products/ProductsListService')
-const { ProductShowService } = require('../services/products/ProductShowService')
-const { ProductUpdateService } = require('../services/products/ProductUpdateService')
+import { ImagesRepository } from '../repositories/images/ImagesRepository.js'
+import { ProductRepository } from '../repositories/products/ProductRepository.js'
+import { ProductCreateService } from '../services/products/ProductCreateService.js'
+import { ProductDeleteService } from '../services/products/ProductDeleteService.js'
+import { ProductsListService } from '../services/products/ProductsListService.js'
+import { ProductShowService } from '../services/products/ProductShowService.js'
+import { ProductUpdateService } from '../services/products/ProductUpdateService.js'
+import { DiskStorage } from '../../providers/DiskStorage.js'
 
-class ProductsController {
+export class ProductsController {
   async index(req, res) {
     const productRepository = new ProductRepository()
     const productsListService = new ProductsListService(productRepository)
@@ -27,12 +29,32 @@ class ProductsController {
   }
 
   async create(req, res) {
-    const { name, description, price, image_id } = req.body
+    const { filename, mimetype } = req.file
+    const { name, description, price } = req.body
+
+    const { deleteTempFile, getTempFile } = new DiskStorage()
+
+    const { buffer } = await getTempFile(filename)
+    await deleteTempFile(filename)
+
+    const imageRepository = new ImagesRepository()
+
+    const imageData = await imageRepository.create({
+      id: filename.split('.')[0],
+      image_buffer: buffer,
+      image_name: filename,
+      image_type: mimetype,
+    })
 
     const productRepository = new ProductRepository()
     const productCreateService = new ProductCreateService(productRepository)
 
-    const { id } = await productCreateService.execute({ name, description, price, image_id })
+    const { id } = await productCreateService.execute({
+      name,
+      description,
+      price: Number(price),
+      image_id: imageData.id,
+    })
 
     return res.status(201).json({ id })
   }
@@ -43,7 +65,13 @@ class ProductsController {
     const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 
-    const { id: updatedProductId } = await productUpdateService.execute({ id, name, description, price, image_id })
+    const { id: updatedProductId } = await productUpdateService.execute({
+      id,
+      name,
+      description,
+      price,
+      image_id,
+    })
 
     return res.json({ id: updatedProductId })
   }
@@ -59,5 +87,3 @@ class ProductsController {
     return res.status(204)
   }
 }
-
-module.exports = { ProductsController }

@@ -1,6 +1,6 @@
-const { IngredientCreateService } = require('../IngredientCreateService')
-const { IngredientsRepositoryInMemory } = require('../../../repositories/ingredients/IngredientsRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { IngredientCreateService } from '../IngredientCreateService.js'
+import { IngredientsRepositoryInMemory } from '../../../repositories/ingredients/IngredientsRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('IngredientCreateService', () => {
   let ingredient

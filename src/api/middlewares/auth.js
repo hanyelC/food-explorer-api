@@ -1,9 +1,9 @@
-const { verify } = require('jsonwebtoken')
+import { verify }from 'jsonwebtoken'
 
-const { AppError } = require('../utils/AppError')
-const { jwtSecret } = require('../../config/vars')
+import { AppError }from '../utils/AppError.js'
+import { jwtSecret }from '../../config/vars.js'
 
-class Auth {
+export class Auth {
   async ensureLogged(req, res, next) {
     const authHeader = req.headers.authorization
 
@@ -53,5 +53,3 @@ class Auth {
     return next()
   }
 }
-
-module.exports = { Auth }

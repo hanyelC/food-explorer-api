@@ -1,11 +1,11 @@
-const { FavoritesRepository } = require('../repositories/favorites/FavoritesRepository')
-const { ProductRepository } = require('../repositories/products/ProductRepository')
-const { FavoriteCreateService } = require('../services/favorites/FavoriteCreateService')
-const { FavoriteDeleteService } = require('../services/favorites/FavoriteDeleteService')
-const { FavoritesListByUserIdService } = require('../services/favorites/FavoritesListByUserIdService')
-const { AppError } = require('../utils/AppError')
+import { FavoritesRepository }from '../repositories/favorites/FavoritesRepository.js'
+import { ProductRepository }from '../repositories/products/ProductRepository.js'
+import { FavoriteCreateService }from '../services/favorites/FavoriteCreateService.js'
+import { FavoriteDeleteService }from '../services/favorites/FavoriteDeleteService.js'
+import { FavoritesListByUserIdService }from '../services/favorites/FavoritesListByUserIdService.js'
+import { AppError }from '../utils/AppError.js'
 
-class FavoritesController {
+export class FavoritesController {
   async index(req, res) {
     const { user_id } = req.user
 
@@ -48,5 +48,3 @@ class FavoritesController {
     return res.status(204).json()
   }
 }
-
-module.exports = { FavoritesController }

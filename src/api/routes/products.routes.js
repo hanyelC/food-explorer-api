@@ -1,13 +1,13 @@
-const { Router } = require('express')
-const { ProductsController } = require('../controllers/ProductsController')
-const { CategoriesController } = require('../controllers/CategoriesController')
-const { Auth } = require('../middlewares/auth')
-const multer = require('multer')
-const { MULTER: multer_configs } = require('../../config/upload')
+import { Router } from 'express'
+import { ProductsController } from '../controllers/ProductsController.js'
+import { CategoriesController } from '../controllers/CategoriesController.js'
+import { Auth } from '../middlewares/auth.js'
+import multer from 'multer'
+import { MULTER as multer_configs } from '../../config/upload.js'
 
 const upload = multer(multer_configs)
 
-const productsRouter = Router()
+export const productsRouter = Router()
 const productsController = new ProductsController()
 const categoriesController = new CategoriesController()
 
@@ -24,5 +24,3 @@ productsRouter.post('/', upload.single('image'), productsController.create)
 productsRouter.put('/', productsController.update)
 productsRouter.delete('/:product_id', productsController.delete)
 productsRouter.post('/category', categoriesController.addProduct)
-
-module.exports = { productsRouter }

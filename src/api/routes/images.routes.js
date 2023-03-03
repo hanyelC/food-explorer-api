@@ -1,11 +1,11 @@
-const { Router } = require('express')
-const multer = require('multer')
+import { Router } from 'express'
+import multer from 'multer'
 
-const { MULTER: multer_configs } = require('../../config/upload')
-const { ImagesController } = require('../controllers/ImagesController')
-const { Auth } = require('../middlewares/auth')
+import { MULTER as multer_configs } from '../../config/upload.js'
+import { ImagesController } from '../controllers/ImagesController.js'
+import { Auth } from '../middlewares/auth.js'
 
-const imagesRouter = Router()
+export const imagesRouter = Router()
 const imagesController = new ImagesController()
 const auth = new Auth()
 
@@ -20,5 +20,3 @@ imagesRouter.use(auth.ensureAdmin)
 imagesRouter.use(upload.single('image'))
 
 imagesRouter.patch('/', imagesController.create)
-
-module.exports = { imagesRouter }

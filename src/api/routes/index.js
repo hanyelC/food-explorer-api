@@ -1,16 +1,16 @@
-const express = require('express')
+import express from 'express'
 
-const { UPLOADS_FOLDER } = require('../../config/upload')
+import { UPLOADS_FOLDER } from '../../config/upload.js'
 
-const { userRouter } = require('./users.routes')
-const { productsRouter } = require('./products.routes')
-const { favoritesRouter } = require('./favorites.routes')
-const { ingredientsRouter } = require('./ingredients.routes')
-const { categoriesRouter } = require('./categories.routes')
-const { sessionsRouter } = require('./sessions.routes')
-const { imagesRouter } = require('./images.routes')
+import { userRouter } from './users.routes.js'
+import { productsRouter } from './products.routes.js'
+import { favoritesRouter } from './favorites.routes.js'
+import { ingredientsRouter } from './ingredients.routes.js'
+import { categoriesRouter } from './categories.routes.js'
+import { sessionsRouter } from './sessions.routes.js'
+import { imagesRouter } from './images.routes.js'
 
-const routes = express.Router()
+export const routes = express.Router()
 
 routes.get('/', (req, res) => {
   return res.json({ message: "Food explorer API" })
@@ -25,5 +25,3 @@ routes.use('/favorites', favoritesRouter)
 routes.use('/ingredients', ingredientsRouter)
 routes.use('/categories', categoriesRouter)
 routes.use('/images', imagesRouter)
-
-module.exports = { routes }

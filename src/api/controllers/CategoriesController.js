@@ -1,9 +1,9 @@
-const { CategoryRepository } = require('../repositories/categories/CategoryRepository')
-const { CategoryCreateService } = require('../services/categories/CategoryCreateService')
-const { ProductRepository } = require('../repositories/products/ProductRepository')
-const { AddCategoryService } = require('../services/categories/AddCategoryService')
+import { CategoryRepository } from '../repositories/categories/CategoryRepository.js'
+import { CategoryCreateService } from '../services/categories/CategoryCreateService.js'
+import { ProductRepository } from '../repositories/products/ProductRepository.js'
+import { AddCategoryService } from '../services/categories/AddCategoryService.js'
 
-class CategoriesController {
+export class CategoriesController {
   async create(req, res) {
     const { name, description } = req.body
 
@@ -28,5 +28,3 @@ class CategoriesController {
     return res.status(201).send()
   }
 }
-
-module.exports = { CategoriesController }

@@ -1,13 +1,13 @@
-const { ImagesRepository } = require('../repositories/images/ImagesRepository')
-const { ProductRepository } = require('../repositories/products/ProductRepository')
-const { ProductCreateService } = require('../services/products/ProductCreateService')
-const { ProductDeleteService } = require('../services/products/ProductDeleteService')
-const { ProductsListService } = require('../services/products/ProductsListService')
-const { ProductShowService } = require('../services/products/ProductShowService')
-const { ProductUpdateService } = require('../services/products/ProductUpdateService')
-const { DiskStorage } = require('../../providers/DiskStorage')
+import { ImagesRepository } from '../repositories/images/ImagesRepository.js'
+import { ProductRepository } from '../repositories/products/ProductRepository.js'
+import { ProductCreateService } from '../services/products/ProductCreateService.js'
+import { ProductDeleteService } from '../services/products/ProductDeleteService.js'
+import { ProductsListService } from '../services/products/ProductsListService.js'
+import { ProductShowService } from '../services/products/ProductShowService.js'
+import { ProductUpdateService } from '../services/products/ProductUpdateService.js'
+import { DiskStorage } from '../../providers/DiskStorage.js'
 
-class ProductsController {
+export class ProductsController {
   async index(req, res) {
     const productRepository = new ProductRepository()
     const productsListService = new ProductsListService(productRepository)
@@ -87,5 +87,3 @@ class ProductsController {
     return res.status(204)
   }
 }
-
-module.exports = { ProductsController }

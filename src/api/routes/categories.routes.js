@@ -1,12 +1,10 @@
-const { Router } = require('express')
-const { CategoriesController } = require('../controllers/CategoriesController')
-const { Auth } = require('../middlewares/auth')
+import { Router } from 'express'
+import { CategoriesController } from '../controllers/CategoriesController.js'
+import { Auth } from '../middlewares/auth.js'
 
-const categoriesRouter = Router()
+export const categoriesRouter = Router()
 const categoriesController = new CategoriesController()
 const auth = new Auth()
 
 categoriesRouter.use(auth.ensureAdmin)
 categoriesRouter.post('/', categoriesController.create)
-
-module.exports = { categoriesRouter }

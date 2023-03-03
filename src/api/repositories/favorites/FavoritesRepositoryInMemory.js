@@ -1,4 +1,4 @@
-class FavoritesRepositoryInMemory {
+export class FavoritesRepositoryInMemory {
   constructor(favorites = []) {
     this.favorites = favorites
   }
@@ -53,5 +53,3 @@ class FavoritesRepositoryInMemory {
     return { id: deletedItem.id }
   }
 }
-
-module.exports = { FavoritesRepositoryInMemory }

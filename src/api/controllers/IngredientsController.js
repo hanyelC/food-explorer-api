@@ -1,9 +1,9 @@
-const { IngredientsRepository } = require('../repositories/ingredients/IngredientsRepository')
-const { IngredientCreateService } = require('../services/ingredients/IngredientCreateService')
-const { ImagesRepository } = require('../repositories/images/ImagesRepository')
-const { DiskStorage } = require('../../providers/DiskStorage')
+import { IngredientsRepository } from '../repositories/ingredients/IngredientsRepository.js'
+import { IngredientCreateService } from '../services/ingredients/IngredientCreateService.js'
+import { ImagesRepository } from '../repositories/images/ImagesRepository.js'
+import { DiskStorage } from '../../providers/DiskStorage.js'
 
-class IngredientsController {
+export class IngredientsController {
   async create(req, res) {
     const { filename, mimetype } = req.file
     const { name } = req.body
@@ -30,5 +30,3 @@ class IngredientsController {
     return res.json({ id })
   }
 }
-
-module.exports = { IngredientsController }

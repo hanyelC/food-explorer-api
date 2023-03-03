@@ -1,6 +1,6 @@
-const { ProductUpdateService } = require('../ProductUpdateService')
-const { ProductRepositoryInMemory } = require('../../../repositories/products/ProductRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { ProductUpdateService } from '../ProductUpdateService.js'
+import { ProductRepositoryInMemory } from '../../../repositories/products/ProductRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('ProductUpdateService', () => {
   let newProductData

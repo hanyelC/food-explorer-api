@@ -1,6 +1,6 @@
-const { prisma } = require("../../lib/prisma");
+import { prisma } from '../../lib/prisma.js'
 
-class ProductRepository {
+export class ProductRepository {
   async index() {
     const products = await prisma.product.findMany({
       select: {
@@ -162,5 +162,3 @@ class ProductRepository {
     return relation;
   }
 }
-
-module.exports = { ProductRepository };

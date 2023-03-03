@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } from "@prisma/client");
 const {
   users,
   products,
@@ -7,7 +7,7 @@ const {
   productCategory,
   ingredients,
   productIngredient,
-} = require("./data");
+} from "./data");
 
 const prisma = new PrismaClient();
 

@@ -1,6 +1,6 @@
-const { prisma } = require('../../lib/prisma')
+import { prisma } from '../../lib/prisma.js'
 
-class IngredientsRepository {
+export class IngredientsRepository {
   async index() {
     const ingredients = await prisma.ingredient.findMany()
 
@@ -46,5 +46,3 @@ class IngredientsRepository {
 
   }
 }
-
-module.exports = { IngredientsRepository }

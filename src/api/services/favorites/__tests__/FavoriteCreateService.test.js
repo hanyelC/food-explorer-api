@@ -1,6 +1,6 @@
-const { FavoriteCreateService } = require('../FavoriteCreateService')
-const { FavoritesRepositoryInMemory } = require('../../../repositories/favorites/FavoritesRepositoryInMemory')
-const { AppError } = require('../../../utils/AppError')
+import { FavoriteCreateService } from '../FavoriteCreateService.js'
+import { FavoritesRepositoryInMemory } from '../../../repositories/favorites/FavoritesRepositoryInMemory.js'
+import { AppError } from '../../../utils/AppError.js'
 
 describe('FavoriteCreateService', () => {
   let user_id

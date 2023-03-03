@@ -1,14 +1,12 @@
-const { Router } = require('express')
-const { IngredientsController } = require('../controllers/IngredientsController')
-const { Auth } = require('../middlewares/auth')
-const multer = require('multer')
-const { MULTER: multer_configs } = require('../../config/upload')
+import { Router } from 'express'
+import multer from 'multer'
+import { IngredientsController } from '../controllers/IngredientsController.js'
+import { Auth } from '../middlewares/auth.js'
+import { MULTER as multer_configs } from '../../config/upload.js'
 
 const upload = multer(multer_configs)
 
-const ingredientsRouter = Router()
+export const ingredientsRouter = Router()
 const ingredientsController = new IngredientsController()
 
 ingredientsRouter.post('/', upload.single('image'), ingredientsController.create)
-
-module.exports = { ingredientsRouter }

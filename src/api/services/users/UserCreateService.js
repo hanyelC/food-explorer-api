@@ -1,7 +1,9 @@
-const { hashSync } = require('bcryptjs')
-const { AppError } = require('../../utils/AppError')
+import { default as bcryptjs } from 'bcryptjs'
+import { AppError } from '../../utils/AppError.js'
 
-class UserCreateService {
+const { hashSync } = bcryptjs
+
+export class UserCreateService {
   constructor(repository) {
     this.repository = repository
   }
@@ -53,5 +55,3 @@ class UserCreateService {
 
   }
 }
-
-module.exports = { UserCreateService }

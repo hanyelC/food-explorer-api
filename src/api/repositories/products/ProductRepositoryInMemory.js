@@ -1,4 +1,4 @@
-class ProductRepositoryInMemory {
+export class ProductRepositoryInMemory {
   constructor(products = []) {
     this.products = products
   }
@@ -64,5 +64,3 @@ class ProductRepositoryInMemory {
 
   }
 }
-
-module.exports = { ProductRepositoryInMemory }

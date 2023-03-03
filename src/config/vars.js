@@ -1,9 +1,8 @@
-require('dotenv').config()
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-module.exports = {
-  env: process.env.NODE_ENV,
-  port: process.env.PORT,
-  baseUrlLocal: process.env.LOCAL_URL,
-  jwtSecret: process.env.JWT_SECRET,
-  jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES
-}
+export const  env = process.env.NODE_ENV
+export const  port = 3333
+export const  baseUrlLocal = process.env.LOCAL_URL
+export const  jwtSecret = process.env.JWT_SECRET
+export const  jwtExpirationInterval = process.env.JWT_EXPIRATION_MINUTES

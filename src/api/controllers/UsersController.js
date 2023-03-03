@@ -1,7 +1,7 @@
-const { UserRepository } = require('../repositories/users/UserRepository')
-const { UserCreateService } = require('../services/users/UserCreateService')
+import { UserRepository } from '../repositories/users/UserRepository.js'
+import { UserCreateService } from '../services/users/UserCreateService.js'
 
-class UsersController {
+export class UsersController {
   async create(req, res) {
     const { name, email, password, passwordConfirm } = req.body
 
@@ -13,5 +13,3 @@ class UsersController {
     return res.status(201).json({ id })
   }
 }
-
-module.exports = { UsersController }

@@ -1,12 +1,13 @@
 {
   "name": "food-explorer-api",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "cross-env NODE_ENV=development nodemon -L ./src/index.js",
-    "test": "jest --watchAll",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll",
     "prepare": "husky install",
     "debug": "nodemon --inspect ./src/index.js"
   },

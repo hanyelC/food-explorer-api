@@ -1,5 +1,5 @@
-const { readFileSync } = require('fs')
-const { resolve } = require('path')
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 const categories = [
   {
@@ -108,7 +108,7 @@ const ingredients = []
 
 const productIngredient = []
 
-module.exports = Object.freeze({
+export default Object.freeze({
   users,
   categories,
   products,

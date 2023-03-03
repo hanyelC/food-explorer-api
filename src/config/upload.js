@@ -1,12 +1,13 @@
-const path = require('path')
-const multer = require('multer')
-const { randomUUID } = require('crypto')
-const { AppError } = require('../api/utils/AppError')
+import path from 'path'
+import multer from 'multer'
+import { randomUUID } from 'node:crypto'
+import { AppError } from '../api/utils/AppError.js'
+import { __dirname } from '../api/utils/__dirname.js'
 
-const TMP_FOLDER = path.resolve(__dirname, '..', '..', 'tmp')
-const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, 'uploads')
+export const TMP_FOLDER = path.resolve(__dirname, '..', '..', 'tmp')
+export const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, 'uploads')
 
-const MULTER = {
+export const MULTER = {
   storage: multer.diskStorage({
     destination: TMP_FOLDER,
     filename(req, file, cb) {
@@ -23,10 +24,4 @@ const MULTER = {
       cb(error, fileName)
     }
   })
-}
-
-module.exports = {
-  TMP_FOLDER,
-  UPLOADS_FOLDER,
-  MULTER
 }

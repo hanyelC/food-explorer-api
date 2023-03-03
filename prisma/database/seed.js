@@ -1,5 +1,5 @@
-const { PrismaClient } from "@prisma/client");
-const {
+import { PrismaClient } from "@prisma/client"
+import {
   users,
   products,
   categories,
@@ -7,7 +7,7 @@ const {
   productCategory,
   ingredients,
   productIngredient,
-} from "./data");
+} from "./data.js"
 
 const prisma = new PrismaClient();
 

@@ -1,8 +1,12 @@
+import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import multer from 'multer'
 import { randomUUID } from 'node:crypto'
 import { AppError } from '../api/utils/AppError.js'
-import { __dirname } from '../api/utils/__dirname.js'
+
+const __filename = fileURLToPath(import.meta.url)
+
+const __dirname = path.dirname(__filename)
 
 export const TMP_FOLDER = path.resolve(__dirname, '..', '..', 'tmp')
 export const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, 'uploads')

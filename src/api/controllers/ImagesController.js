@@ -10,14 +10,16 @@ export class ImagesController {
   async create(req, res) {
     const { filename, mimetype } = req.file
 
-    const buffer = await fs.promises.readFile(path.resolve(TMP_FOLDER, filename))
+    const buffer = await fs.promises.readFile(
+      path.resolve(TMP_FOLDER, filename)
+    )
 
     const repository = new ImagesRepository()
     const data = await repository.create({
       id: filename.split('.')[0],
       image_buffer: buffer,
       image_name: filename,
-      image_type: mimetype
+      image_type: mimetype,
     })
 
     const diskStorage = new DiskStorage()
@@ -50,7 +52,7 @@ export class ImagesController {
     const image = await repository.findById(id)
 
     if (!image) {
-      return res.status(404).json({ message: "Image not found" })
+      return res.status(404).json({ message: 'Image not found' })
     }
 
     const diskStorage = new DiskStorage()

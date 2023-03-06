@@ -21,7 +21,10 @@ export class CategoriesController {
     const categoryRepository = new CategoryRepository()
     const productRepository = new ProductRepository()
 
-    const addCategoryService = new AddCategoryService(categoryRepository, productRepository)
+    const addCategoryService = new AddCategoryService(
+      categoryRepository,
+      productRepository
+    )
 
     await addCategoryService.execute({ product_id, category_id })
 

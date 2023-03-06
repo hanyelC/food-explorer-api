@@ -9,4 +9,8 @@ const upload = multer(multer_configs)
 export const ingredientsRouter = Router()
 const ingredientsController = new IngredientsController()
 
-ingredientsRouter.post('/', upload.single('image'), ingredientsController.create)
+ingredientsRouter.post(
+  '/',
+  upload.single('image'),
+  ingredientsController.create
+)

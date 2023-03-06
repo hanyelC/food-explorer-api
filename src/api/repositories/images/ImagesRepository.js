@@ -4,8 +4,8 @@ export class ImagesRepository {
   async findById(id) {
     const image = await prisma.image.findUnique({
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return image
@@ -17,8 +17,8 @@ export class ImagesRepository {
         id,
         image_data: image_buffer,
         image_name: image_name,
-        image_type: image_type
-      }
+        image_type: image_type,
+      },
     })
 
     return image
@@ -27,8 +27,8 @@ export class ImagesRepository {
   async delete(id) {
     await prisma.image.delete({
       where: {
-        id
-      }
+        id,
+      },
     })
   }
 }

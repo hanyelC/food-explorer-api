@@ -11,8 +11,8 @@ export class FavoritesRepository {
     const favorite = await prisma.favorite.findFirst({
       where: {
         fk_id_user: user_id,
-        fk_id_product: product_id
-      }
+        fk_id_product: product_id,
+      },
     })
 
     return favorite
@@ -21,7 +21,7 @@ export class FavoritesRepository {
   async findByUserId(user_id) {
     const favorites = await prisma.favorite.findMany({
       where: {
-        fk_id_user: user_id
+        fk_id_user: user_id,
       },
 
       select: {
@@ -35,14 +35,13 @@ export class FavoritesRepository {
             name: true,
             description: true,
             ingredients: true,
-            categories: true
-          }
-        }
-      }
+            categories: true,
+          },
+        },
+      },
     })
 
-    const products = favorites.map(prod => prod.product)
-
+    const products = favorites.map((prod) => prod.product)
 
     return products
   }
@@ -50,8 +49,8 @@ export class FavoritesRepository {
   async findByProductId(product_id) {
     const favorites = await prisma.favorite.findMany({
       where: {
-        fk_id_product: product_id
-      }
+        fk_id_product: product_id,
+      },
     })
 
     return favorites
@@ -61,8 +60,8 @@ export class FavoritesRepository {
     const favorite = await prisma.favorite.create({
       data: {
         fk_id_user: user_id,
-        fk_id_product: product_id
-      }
+        fk_id_product: product_id,
+      },
     })
 
     return { id: favorite.id }
@@ -73,9 +72,9 @@ export class FavoritesRepository {
       where: {
         fk_id_user_fk_id_product: {
           fk_id_user: user_id,
-          fk_id_product: product_id
-        }
-      }
+          fk_id_product: product_id,
+        },
+      },
     })
 
     return { id: deletedItem.id }

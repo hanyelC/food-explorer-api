@@ -9,15 +9,17 @@ describe('ProductDeleteService', () => {
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image:
+        '00101101001010110101010101010101001011010101010010101010101010101',
     },
     {
       id: 2,
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
-    }
+      image:
+        '00101101001010110101010101010101001011010101010010101010101010101',
+    },
   ]
 
   let productRepositoryInMemory
@@ -43,22 +45,21 @@ describe('ProductDeleteService', () => {
   })
 
   test('Should throw an App error without id', async () => {
-    await expect(productDeleteService.execute())
-      .rejects
-      .toEqual(new AppError('Product id is required.'))
+    await expect(productDeleteService.execute()).rejects.toEqual(
+      new AppError('Product id is required.')
+    )
   })
 
-  test.each([
-    { value: [] },
-    { value: {} },
-    { value: 'string' },
-  ])('Should throw an App error with invalid id => $value', async ({ value }) => {
-    await expect(productDeleteService.execute(value))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
+  test.each([{ value: [] }, { value: {} }, { value: 'string' }])(
+    'Should throw an App error with invalid id => $value',
+    async ({ value }) => {
+      await expect(productDeleteService.execute(value)).rejects.toEqual(
+        new AppError('Product id should be a number.')
+      )
+    }
+  )
 
-  test('Should not delete an product that don\'t exits', async () => {
+  test("Should not delete an product that don't exits", async () => {
     const deletedItem = await productDeleteService.execute(5)
 
     expect(deletedItem).toHaveProperty('id')

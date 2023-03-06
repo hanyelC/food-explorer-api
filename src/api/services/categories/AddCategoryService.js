@@ -29,7 +29,7 @@ export class AddCategoryService {
       throw new AppError('Invalid product id')
     }
 
-    const productAlreadyInCategory = product.categories.find(item => {
+    const productAlreadyInCategory = product.categories.find((item) => {
       return item.category.id === category_id
     })
 

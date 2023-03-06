@@ -1,4 +1,4 @@
-import { AppError } from "../../utils/AppError.js"
+import { AppError } from '../../utils/AppError.js'
 
 export class ProductUpdateService {
   constructor(repository) {
@@ -54,7 +54,13 @@ export class ProductUpdateService {
       throw new AppError('Já existe um produto cadastrado com esse nome.')
     }
 
-    const prod = await this.repository.update({ id, name, description, price, image_id })
+    const prod = await this.repository.update({
+      id,
+      name,
+      description,
+      price,
+      image_id,
+    })
 
     return prod
   }

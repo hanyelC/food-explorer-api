@@ -10,18 +10,20 @@ export class FavoritesRepositoryInMemory {
   async findById(user_id, product_id) {
     const id = Number('' + user_id + product_id)
 
-    const favorite = this.favorites.find(fav => fav.id === id)
+    const favorite = this.favorites.find((fav) => fav.id === id)
 
     return favorite
   }
 
   async findByUserId(user_id) {
-    const favorites = this.favorites.filter(fav => fav.user_id === user_id)
+    const favorites = this.favorites.filter((fav) => fav.user_id === user_id)
     return favorites
   }
 
   async findByProductId(product_id) {
-    const favorites = this.favorites.filter(fav => fav.product_id === product_id)
+    const favorites = this.favorites.filter(
+      (fav) => fav.product_id === product_id
+    )
     return favorites
   }
 
@@ -29,7 +31,7 @@ export class FavoritesRepositoryInMemory {
     const favorite = {
       id: Number('' + user_id + product_id),
       user_id,
-      product_id
+      product_id,
     }
 
     this.favorites.push(favorite)
@@ -40,7 +42,7 @@ export class FavoritesRepositoryInMemory {
   async delete(user_id, product_id) {
     const id = Number('' + user_id + product_id)
 
-    const itemToDelete = this.favorites.find(fav => fav.id === id)
+    const itemToDelete = this.favorites.find((fav) => fav.id === id)
 
     const indexToDelete = this.favorites.indexOf(itemToDelete)
 

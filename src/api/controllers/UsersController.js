@@ -8,7 +8,12 @@ export class UsersController {
     const userRepository = new UserRepository()
     const userCreateService = new UserCreateService(userRepository)
 
-    const { id } = await userCreateService.execute({ name, email, password, passwordConfirm })
+    const { id } = await userCreateService.execute({
+      name,
+      email,
+      password,
+      passwordConfirm,
+    })
 
     return res.status(201).json({ id })
   }

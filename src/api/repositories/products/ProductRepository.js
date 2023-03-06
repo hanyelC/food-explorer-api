@@ -12,8 +12,8 @@ export class ProductRepository {
           select: {
             id: true,
             image_name: true,
-            image_type: true
-          }
+            image_type: true,
+          },
         },
         ingredients: {
           select: {
@@ -25,12 +25,12 @@ export class ProductRepository {
                   select: {
                     id: true,
                     image_name: true,
-                    image_type: true
-                  }
-                }
-              }
-            }
-          }
+                    image_type: true,
+                  },
+                },
+              },
+            },
+          },
         },
         categories: {
           select: {
@@ -38,17 +38,17 @@ export class ProductRepository {
               select: {
                 id: true,
                 name: true,
-                description: true
-              }
-            }
-          }
+                description: true,
+              },
+            },
+          },
         },
       },
       orderBy: {
-        id: 'asc'
-      }
+        id: 'asc',
+      },
     })
-    return products;
+    return products
   }
 
   async findById(id) {
@@ -97,9 +97,9 @@ export class ProductRepository {
       where: {
         id,
       },
-    });
+    })
 
-    return product;
+    return product
   }
 
   async findByName(name) {
@@ -107,9 +107,9 @@ export class ProductRepository {
       where: {
         name,
       },
-    });
+    })
 
-    return product;
+    return product
   }
 
   async create({ name, description, price, image_id }) {
@@ -120,9 +120,9 @@ export class ProductRepository {
         price,
         image_id,
       },
-    });
+    })
 
-    return { id: newProduct.id };
+    return { id: newProduct.id }
   }
 
   async update({ id, name, description, price, image_id }) {
@@ -136,9 +136,9 @@ export class ProductRepository {
         price,
         image_id,
       },
-    });
+    })
 
-    return product;
+    return product
   }
 
   async delete(id) {
@@ -146,9 +146,9 @@ export class ProductRepository {
       where: {
         id,
       },
-    });
+    })
 
-    return { id: deletedProduct.id };
+    return { id: deletedProduct.id }
   }
 
   async addCategory(product_id, category_id) {
@@ -157,8 +157,8 @@ export class ProductRepository {
         fk_id_category: category_id,
         fk_id_product: product_id,
       },
-    });
+    })
 
-    return relation;
+    return relation
   }
 }

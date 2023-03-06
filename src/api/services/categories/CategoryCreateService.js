@@ -15,7 +15,9 @@ export class CategoryCreateService {
     }
 
     if (name.length > 50) {
-      throw new AppError('Nome da categoria não deve ter mais que 50 caracteres.')
+      throw new AppError(
+        'Nome da categoria não deve ter mais que 50 caracteres.'
+      )
     }
 
     if (!description) {

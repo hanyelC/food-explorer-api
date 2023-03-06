@@ -1,7 +1,7 @@
-import { verify }from 'jsonwebtoken'
+import { verify } from 'jsonwebtoken'
 
-import { AppError }from '../utils/AppError.js'
-import { jwtSecret }from '../../config/vars.js'
+import { AppError } from '../utils/AppError.js'
+import { jwtSecret } from '../../config/vars.js'
 
 export class Auth {
   async ensureLogged(req, res, next) {

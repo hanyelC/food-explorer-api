@@ -13,7 +13,7 @@ import { imagesRouter } from './images.routes.js'
 export const routes = express.Router()
 
 routes.get('/', (req, res) => {
-  return res.json({ message: "Food explorer API" })
+  return res.json({ message: 'Food explorer API' })
 })
 
 routes.use('/files', express.static(UPLOADS_FOLDER))

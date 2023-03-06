@@ -1,7 +1,12 @@
 import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const categories = [
+const __filename = fileURLToPath(import.meta.url)
+
+const __dirname = dirname(__filename)
+
+export const categories = Object.freeze([
   {
     id: 1,
     name: 'principais',
@@ -22,9 +27,9 @@ const categories = [
     name: 'bebidas',
     description: 'Bebidas',
   }
-]
+])
 
-const users = [
+export const users = Object.freeze([
   {
     id: 1,
     email: 'admin@admin.com',
@@ -39,9 +44,9 @@ const users = [
     admin: false,
     password: '$2a$10$NddwXmOQerz1kY.k6ZkpUeQIKOU41Ncb5mLvzekiqnmeqG0uh7FqW',
   }
-]
+])
 
-const products = [
+export const products = Object.freeze([
   {
     id: 1,
     name: 'Pão com mortadela',
@@ -64,9 +69,9 @@ const products = [
     image_id: '01065e55-1c36-49da-b7ab-d96ac207fea3'
   },
 
-]
+])
 
-const images = [
+export const images = Object.freeze([
   {
     id: '4e8ccd93-cffe-4704-95e8-09c20da8ebb9',
     image_data: readFileSync(resolve(__dirname, 'images', '4e8ccd93-cffe-4704-95e8-09c20da8ebb9.png')),
@@ -79,9 +84,9 @@ const images = [
     image_type: 'image/png',
     image_name: '01065e55-1c36-49da-b7ab-d96ac207fea3.png'
   }
-]
+])
 
-const productCategory = [
+export const productCategory = Object.freeze([
   {
     fk_id_category: 1,
     fk_id_product: 1
@@ -102,18 +107,8 @@ const productCategory = [
     fk_id_category: 2,
     fk_id_product: 3
   }
-]
+])
 
-const ingredients = []
+export const ingredients = Object.freeze([])
 
-const productIngredient = []
-
-export default Object.freeze({
-  users,
-  categories,
-  products,
-  images,
-  productCategory,
-  ingredients,
-  productIngredient
-})
+export const productIngredient = Object.freeze([])

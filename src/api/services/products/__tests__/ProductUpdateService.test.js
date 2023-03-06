@@ -12,15 +12,17 @@ describe('ProductUpdateService', () => {
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id:
+        '00101101001010110101010101010101001011010101010010101010101010101',
     },
     {
       id: 2,
       name: 'foo',
       description: 'lorem ipsum',
       price: 30,
-      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
-    }
+      image_id:
+        '00101101001010110101010101010101001011010101010010101010101010101',
+    },
   ]
 
   beforeEach(() => {
@@ -29,7 +31,8 @@ describe('ProductUpdateService', () => {
       name: 'foo baz',
       description: 'another',
       price: 30,
-      image_id: '00101101001010110101010101010101001011010101010010101010101010101'
+      image_id:
+        '00101101001010110101010101010101001011010101010010101010101010101',
     }
     productRepositoryInMemory = new ProductRepositoryInMemory(products)
     productUpdateService = new ProductUpdateService(productRepositoryInMemory)
@@ -44,82 +47,100 @@ describe('ProductUpdateService', () => {
   test.each([
     { item: 'id', errorMessage: 'Id do produto é obrigatório.' },
     { item: 'name', errorMessage: 'Nome do produto é obrigatório.' },
-    { item: 'description', errorMessage: 'Descrição do produto é obrigatória.' },
+    {
+      item: 'description',
+      errorMessage: 'Descrição do produto é obrigatória.',
+    },
     { item: 'price', errorMessage: 'Preço do produto é obrigatório.' },
     { item: 'image_id', errorMessage: 'Imagem do produto é obrigatória.' },
-  ])('Product should not be updated without $item', async ({ item, errorMessage }) => {
-    delete newProductData[item]
+  ])(
+    'Product should not be updated without $item',
+    async ({ item, errorMessage }) => {
+      delete newProductData[item]
 
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError(errorMessage))
-  })
-
-  test.each([
-    { value: 'string' },
-    { value: [] },
-    { value: {} },
-    { value: () => 1 }
-  ])('Product should note be updated with invalid id => $value', async ({ value }) => {
-    newProductData.id = value
-
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Id do produto deve ser um número.'))
-  })
-
-  test.each([
-    { value: 1 },
-    { value: [] },
-    { value: {} },
-    { value: () => 'true' }
-  ])('Product should not be updated with invalid name => $value', async ({ value }) => {
-    newProductData.name = value
-
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Nome do produto deve ser um texto.'))
-  })
-
-  test.each([
-    { value: 1 },
-    { value: [] },
-    { value: {} },
-    { value: () => 'true' }
-  ])('Product should not be updated with invalid description => $value', async ({ value }) => {
-    newProductData.description = value
-
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Descrição do produto deve ser um texto.'))
-  })
+      await expect(
+        productUpdateService.execute(newProductData)
+      ).rejects.toEqual(new AppError(errorMessage))
+    }
+  )
 
   test.each([
     { value: 'string' },
     { value: [] },
     { value: {} },
-    { value: () => 1 }
-  ])('Product should note be updated with invalid price => $value', async ({ value }) => {
-    newProductData.price = value
+    { value: () => 1 },
+  ])(
+    'Product should note be updated with invalid id => $value',
+    async ({ value }) => {
+      newProductData.id = value
 
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Preço do produto deve ser um número.'))
-  })
+      await expect(
+        productUpdateService.execute(newProductData)
+      ).rejects.toEqual(new AppError('Id do produto deve ser um número.'))
+    }
+  )
+
+  test.each([
+    { value: 1 },
+    { value: [] },
+    { value: {} },
+    { value: () => 'true' },
+  ])(
+    'Product should not be updated with invalid name => $value',
+    async ({ value }) => {
+      newProductData.name = value
+
+      await expect(
+        productUpdateService.execute(newProductData)
+      ).rejects.toEqual(new AppError('Nome do produto deve ser um texto.'))
+    }
+  )
+
+  test.each([
+    { value: 1 },
+    { value: [] },
+    { value: {} },
+    { value: () => 'true' },
+  ])(
+    'Product should not be updated with invalid description => $value',
+    async ({ value }) => {
+      newProductData.description = value
+
+      await expect(
+        productUpdateService.execute(newProductData)
+      ).rejects.toEqual(new AppError('Descrição do produto deve ser um texto.'))
+    }
+  )
+
+  test.each([
+    { value: 'string' },
+    { value: [] },
+    { value: {} },
+    { value: () => 1 },
+  ])(
+    'Product should note be updated with invalid price => $value',
+    async ({ value }) => {
+      newProductData.price = value
+
+      await expect(
+        productUpdateService.execute(newProductData)
+      ).rejects.toEqual(new AppError('Preço do produto deve ser um número.'))
+    }
+  )
 
   test('Product should not be updated to a name that already exists', async () => {
     newProductData.name = 'foo'
 
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Já existe um produto cadastrado com esse nome.'))
+    await expect(productUpdateService.execute(newProductData)).rejects.toEqual(
+      new AppError('Já existe um produto cadastrado com esse nome.')
+    )
   })
 
   test('Product that not exists should not be updated', async () => {
     newProductData.id = 10
 
-    await expect(productUpdateService.execute(newProductData))
-      .rejects
-      .toEqual(new AppError('Produto não encontrado.'))
+    await expect(productUpdateService.execute(newProductData)).rejects.toEqual(
+      new AppError('Produto não encontrado.')
+    )
   })
 })

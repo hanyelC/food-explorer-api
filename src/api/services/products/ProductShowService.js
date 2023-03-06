@@ -1,4 +1,4 @@
-import { AppError } from "../../utils/AppError.js"
+import { AppError } from '../../utils/AppError.js'
 
 export class ProductShowService {
   constructor(repository) {
@@ -12,7 +12,11 @@ export class ProductShowService {
 
     product_id = Number(product_id)
 
-    if (typeof product_id != 'number' || isNaN(product_id) || product_id === 0) {
+    if (
+      typeof product_id != 'number' ||
+      isNaN(product_id) ||
+      product_id === 0
+    ) {
       throw new AppError('Product id should be a number.')
     }
 

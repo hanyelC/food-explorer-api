@@ -19,13 +19,16 @@ export const MULTER = {
       const [type, subType] = file.mimetype.split('/')
 
       if (type !== 'image') {
-        error = new AppError('Invalid file format, the file must be an image!', 400)
+        error = new AppError(
+          'Invalid file format, the file must be an image!',
+          400
+        )
       }
 
       const prefix = randomUUID()
       const fileName = `${prefix}.${subType}`
 
       cb(error, fileName)
-    }
-  })
+    },
+  }),
 }

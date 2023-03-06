@@ -4,8 +4,8 @@ export class CategoryRepository {
   async findByName(name) {
     const category = await prisma.category.findFirst({
       where: {
-        name
-      }
+        name,
+      },
     })
 
     return category
@@ -14,8 +14,8 @@ export class CategoryRepository {
   async findById(id) {
     const category = await prisma.category.findFirst({
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return category
@@ -25,8 +25,8 @@ export class CategoryRepository {
     const newCategory = await prisma.category.create({
       data: {
         name,
-        description
-      }
+        description,
+      },
     })
 
     return newCategory

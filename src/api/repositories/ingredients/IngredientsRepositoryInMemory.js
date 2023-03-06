@@ -8,20 +8,20 @@ export class IngredientsRepositoryInMemory {
   }
 
   async findById(id) {
-    const ingredient = this.ingredients.find(ing => ing.id === id)
+    const ingredient = this.ingredients.find((ing) => ing.id === id)
     return ingredient
   }
 
   async findByName(name) {
-    const ingredient = this.ingredients.find(ing => ing.name === name)
+    const ingredient = this.ingredients.find((ing) => ing.name === name)
     return ingredient
   }
 
   async create({ name, image_id }) {
     const newIngredient = {
-      id: Math.floor(Math.random() * 1E9),
+      id: Math.floor(Math.random() * 1e9),
       name,
-      image_id
+      image_id,
     }
 
     this.ingredients.push(newIngredient)
@@ -29,11 +29,7 @@ export class IngredientsRepositoryInMemory {
     return { id: newIngredient.id }
   }
 
-  async update({ name, image }) {
+  async update({ name, image }) {}
 
-  }
-
-  async delete(id) {
-
-  }
+  async delete(id) {}
 }

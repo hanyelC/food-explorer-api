@@ -1,16 +1,18 @@
-import { FavoritesRepository }from '../repositories/favorites/FavoritesRepository.js'
-import { ProductRepository }from '../repositories/products/ProductRepository.js'
-import { FavoriteCreateService }from '../services/favorites/FavoriteCreateService.js'
-import { FavoriteDeleteService }from '../services/favorites/FavoriteDeleteService.js'
-import { FavoritesListByUserIdService }from '../services/favorites/FavoritesListByUserIdService.js'
-import { AppError }from '../utils/AppError.js'
+import { FavoritesRepository } from '../repositories/favorites/FavoritesRepository.js'
+import { ProductRepository } from '../repositories/products/ProductRepository.js'
+import { FavoriteCreateService } from '../services/favorites/FavoriteCreateService.js'
+import { FavoriteDeleteService } from '../services/favorites/FavoriteDeleteService.js'
+import { FavoritesListByUserIdService } from '../services/favorites/FavoritesListByUserIdService.js'
+import { AppError } from '../utils/AppError.js'
 
 export class FavoritesController {
   async index(req, res) {
     const { user_id } = req.user
 
     const repository = new FavoritesRepository()
-    const favoritesListByUserIdService = new FavoritesListByUserIdService(repository)
+    const favoritesListByUserIdService = new FavoritesListByUserIdService(
+      repository
+    )
 
     const favorites = await favoritesListByUserIdService.execute(user_id)
 

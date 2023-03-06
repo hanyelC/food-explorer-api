@@ -8,22 +8,22 @@ export class ProductRepositoryInMemory {
   }
 
   async findById(id) {
-    const product = this.products.find(prod => prod.id === id)
+    const product = this.products.find((prod) => prod.id === id)
     return product
   }
 
   async findByName(name) {
-    const product = this.products.find(prod => prod.name === name)
+    const product = this.products.find((prod) => prod.name === name)
     return product
   }
 
   async create({ name, description, price, image_id }) {
     const newProduct = {
-      id: Math.floor(Math.random() * 1E9),
+      id: Math.floor(Math.random() * 1e9),
       name,
       description,
       price,
-      image_id
+      image_id,
     }
 
     this.products.push(newProduct)
@@ -32,25 +32,25 @@ export class ProductRepositoryInMemory {
   }
 
   async update({ id, name, description, price, image_id }) {
-    this.products = this.products.map(prod => {
+    this.products = this.products.map((prod) => {
       if (prod.id === id) {
         return {
           id,
           name,
           description,
           price,
-          image_id
+          image_id,
         }
       }
 
       return prod
     })
 
-    return this.products.find(prod => prod.id = id)
+    return this.products.find((prod) => (prod.id = id))
   }
 
   async delete(id) {
-    const itemToDelete = this.products.find(prod => prod.id === id)
+    const itemToDelete = this.products.find((prod) => prod.id === id)
 
     if (itemToDelete === undefined) {
       return { id: null }
@@ -61,6 +61,5 @@ export class ProductRepositoryInMemory {
     const deletedItem = this.products.splice(indexToDelete, 1)[0]
 
     return { id: deletedItem.id }
-
   }
 }

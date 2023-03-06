@@ -4,20 +4,20 @@ export class CategoryRepositoryInMemory {
   }
 
   async findById(id) {
-    const category = this.categories.find(category => category.id === id)
+    const category = this.categories.find((category) => category.id === id)
     return category
   }
 
   async findByName(name) {
-    const category = this.categories.find(category => category.name === name)
+    const category = this.categories.find((category) => category.name === name)
     return category
   }
 
   async create({ name, description }) {
     const newCategory = {
-      id: Math.floor(Math.random() * 1E9),
+      id: Math.floor(Math.random() * 1e9),
       name,
-      description
+      description,
     }
 
     this.categories.push(newCategory)
@@ -26,12 +26,12 @@ export class CategoryRepositoryInMemory {
   }
 
   async update({ id, name, description }) {
-    this.categories = this.categories.map(category => {
+    this.categories = this.categories.map((category) => {
       if (category.id === id) {
         return {
           id,
           name,
-          description
+          description,
         }
       }
 

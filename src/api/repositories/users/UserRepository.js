@@ -1,12 +1,11 @@
 import { prisma } from '../../lib/prisma.js'
 
 export class UserRepository {
-
   async findByEmail(email) {
     const user = await prisma.user.findFirst({
       where: {
-        email
-      }
+        email,
+      },
     })
 
     return user
@@ -17,8 +16,8 @@ export class UserRepository {
       data: {
         email,
         name,
-        password
-      }
+        password,
+      },
     })
 
     return newUser

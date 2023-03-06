@@ -28,7 +28,12 @@ export class ProductCreateService {
       throw new AppError('Já existe um produto cadastrado com esse nome.')
     }
 
-    const productCreatedId = await this.repository.create({ name, description, price, image_id })
+    const productCreatedId = await this.repository.create({
+      name,
+      description,
+      price,
+      image_id,
+    })
 
     return productCreatedId
   }

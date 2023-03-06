@@ -10,8 +10,8 @@ export class IngredientsRepository {
   async findById(id) {
     const ingredient = await prisma.ingredient.findFirst({
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return ingredient
@@ -20,8 +20,8 @@ export class IngredientsRepository {
   async findByName(name) {
     const ingredient = await prisma.ingredient.findFirst({
       where: {
-        name
-      }
+        name,
+      },
     })
 
     return ingredient
@@ -31,18 +31,14 @@ export class IngredientsRepository {
     const newIngredient = await prisma.ingredient.create({
       data: {
         name,
-        image_id
-      }
+        image_id,
+      },
     })
 
     return { id: newIngredient.id }
   }
 
-  async update({ name, image }) {
+  async update({ name, image }) {}
 
-  }
-
-  async delete(id) {
-
-  }
+  async delete(id) {}
 }

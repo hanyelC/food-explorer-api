@@ -26,7 +26,9 @@ export class UserCreateService {
     }
 
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      throw new AppError('Formato de email inválido, formato exemplo: fulano@gmail.com')
+      throw new AppError(
+        'Formato de email inválido, formato exemplo: fulano@gmail.com'
+      )
     }
 
     if (typeof password != 'string') {
@@ -49,9 +51,12 @@ export class UserCreateService {
 
     const hashedPassword = hashSync(password)
 
-    const userCreated = await this.repository.create({ name, email, password: hashedPassword })
+    const userCreated = await this.repository.create({
+      name,
+      email,
+      password: hashedPassword,
+    })
 
     return { id: userCreated.id }
-
   }
 }

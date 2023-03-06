@@ -1,4 +1,4 @@
-import * as jsonwebtoken from 'jsonwebtoken'
+import { default as jsonwebtoken } from 'jsonwebtoken'
 import { default as bcryptjs } from 'bcryptjs'
 import { jwtSecret, jwtExpirationInterval } from '../../../config/vars.js'
 import { AppError } from '../../utils/AppError.js'
@@ -34,17 +34,16 @@ export class SessionCreateService {
 
     const subject = JSON.stringify({
       user_id: user.id,
-      isAdmin: user.admin
+      isAdmin: user.admin,
     })
 
     const token = sign({}, jwtSecret, {
       subject,
-      expiresIn: jwtExpirationInterval + 'm'
+      expiresIn: jwtExpirationInterval + 'm',
     })
 
     delete user.password
 
     return { user, token }
-
   }
 }

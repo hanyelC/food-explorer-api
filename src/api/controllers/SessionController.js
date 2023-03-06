@@ -8,7 +8,10 @@ export class SessionController {
     const userRepository = new UserRepository()
     const sessionCreateService = new SessionCreateService(userRepository)
 
-    const { user, token } = await sessionCreateService.execute({ email, password })
+    const { user, token } = await sessionCreateService.execute({
+      email,
+      password,
+    })
 
     return res.json({ user, token })
   }

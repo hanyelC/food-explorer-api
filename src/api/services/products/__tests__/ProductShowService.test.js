@@ -11,15 +11,16 @@ describe('ProductShowService', () => {
       name: 'pizza',
       description: 'pizza de trigo',
       price: 30,
-      image: '00101101001010110101010101010101001011010101010010101010101010101'
+      image:
+        '00101101001010110101010101010101001011010101010010101010101010101',
     },
     {
       id: 2,
       name: 'foo',
       description: 'lorem ipsum',
       price: 45,
-      image: '010101010101001011010101010010101010101010101'
-    }
+      image: '010101010101001011010101010010101010101010101',
+    },
   ]
 
   beforeEach(() => {
@@ -40,24 +41,23 @@ describe('ProductShowService', () => {
   })
 
   test('Should throw without id', async () => {
-    await expect(productShowService.execute())
-      .rejects
-      .toEqual(new AppError('Product id is required.'))
+    await expect(productShowService.execute()).rejects.toEqual(
+      new AppError('Product id is required.')
+    )
   })
 
-  test.each([
-    { value: [] },
-    { value: {} },
-    { value: 'string' },
-  ])('Should throw with invalid id => $value', async ({ value }) => {
-    await expect(productShowService.execute(value))
-      .rejects
-      .toEqual(new AppError('Product id should be a number.'))
-  })
+  test.each([{ value: [] }, { value: {} }, { value: 'string' }])(
+    'Should throw with invalid id => $value',
+    async ({ value }) => {
+      await expect(productShowService.execute(value)).rejects.toEqual(
+        new AppError('Product id should be a number.')
+      )
+    }
+  )
 
-  test('Should throw with an id that does\'t exits', async () => {
-    await expect(productShowService.execute(5))
-      .rejects
-      .toEqual(new AppError('Produto não encontrado.'))
+  test("Should throw with an id that does't exits", async () => {
+    await expect(productShowService.execute(5)).rejects.toEqual(
+      new AppError('Produto não encontrado.')
+    )
   })
 })

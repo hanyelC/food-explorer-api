@@ -21,6 +21,6 @@ productsRouter.get('/:product_id', productsController.show)
 productsRouter.use(auth.ensureAdmin)
 
 productsRouter.post('/', upload.single('image'), productsController.create)
-productsRouter.put('/', productsController.update)
+productsRouter.put('/:product_id', upload.single('image'), productsController.update)
 productsRouter.delete('/:product_id', productsController.delete)
 productsRouter.post('/category', categoriesController.addProduct)

@@ -1,3 +1,4 @@
+import { ImagesRepository } from '../../repositories/images/ImagesRepository.js'
 import { AppError } from '../../utils/AppError.js'
 
 export class ProductUpdateService {
@@ -5,7 +6,7 @@ export class ProductUpdateService {
     this.repository = repository
   }
 
-  async execute({ id, name, description, price, image_id }) {
+  async execute({ id, name, description, price, image, ingredients }) {
     if (!id) {
       throw new AppError('Id do produto é obrigatório.')
     }
@@ -44,8 +45,21 @@ export class ProductUpdateService {
       throw new AppError('Preço do produto deve ser um número.')
     }
 
-    if (!image_id) {
-      throw new AppError('Imagem do produto é obrigatória.')
+    let image_id
+    
+    if (image) {
+      const { image_buffer, image_name, image_type } = image
+
+      const imageRepository = new ImagesRepository()
+
+      const imageData = await imageRepository.create({
+        id: image_name.split('.')[0],
+        image_buffer,
+        image_name,
+        image_type,
+      })
+
+      image_id = imageData.id
     }
 
     const productWithName = await this.repository.findByName(name)
@@ -60,6 +74,7 @@ export class ProductUpdateService {
       description,
       price,
       image_id,
+      ingredients,
     })
 
     return prod

@@ -15,23 +15,7 @@ export class ProductRepository {
             image_type: true,
           },
         },
-        ingredients: {
-          select: {
-            ingredient: {
-              select: {
-                id: true,
-                name: true,
-                image: {
-                  select: {
-                    id: true,
-                    image_name: true,
-                    image_type: true,
-                  },
-                },
-              },
-            },
-          },
-        },
+        ingredients: true,
         categories: {
           select: {
             category: {
@@ -65,23 +49,7 @@ export class ProductRepository {
             image_type: true,
           },
         },
-        ingredients: {
-          select: {
-            ingredient: {
-              select: {
-                id: true,
-                name: true,
-                image: {
-                  select: {
-                    id: true,
-                    image_name: true,
-                    image_type: true,
-                  },
-                },
-              },
-            },
-          },
-        },
+        ingredients: true,
         categories: {
           select: {
             category: {
@@ -112,20 +80,37 @@ export class ProductRepository {
     return product
   }
 
-  async create({ name, description, price, image_id }) {
+  async create({
+    name,
+    description,
+    price,
+    image_id,
+    ingredients,
+    categoryId,
+  }) {
     const newProduct = await prisma.product.create({
       data: {
         name,
         description,
         price,
         image_id,
+        ingredients,
       },
     })
+
+    if (categoryId) {
+      await prisma.productCategory.create({
+        data: {
+          fk_id_category: categoryId,
+          fk_id_product: newProduct.id,
+        },
+      })
+    }
 
     return { id: newProduct.id }
   }
 
-  async update({ id, name, description, price, image_id }) {
+  async update({ id, name, description, price, image_id, ingredients }) {
     const product = await prisma.product.update({
       where: {
         id,
@@ -135,6 +120,7 @@ export class ProductRepository {
         description,
         price,
         image_id,
+        ingredients,
       },
     })
 

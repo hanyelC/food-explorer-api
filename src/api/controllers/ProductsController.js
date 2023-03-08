@@ -30,7 +30,7 @@ export class ProductsController {
 
   async create(req, res) {
     const { filename, mimetype } = req.file
-    const { name, description, price } = req.body
+    const { categoryId, name, description, ingredients = [], price } = req.body
 
     const { deleteTempFile, getTempFile } = new DiskStorage()
 
@@ -50,8 +50,10 @@ export class ProductsController {
     const productCreateService = new ProductCreateService(productRepository)
 
     const { id } = await productCreateService.execute({
+      categoryId: Number(categoryId),
       name,
       description,
+      ingredients,
       price: Number(price),
       image_id: imageData.id,
     })
@@ -60,17 +62,39 @@ export class ProductsController {
   }
 
   async update(req, res) {
-    const { id, name, description, price, image_id } = req.body
+    const filename = req?.file?.filename
+    const mimetype = req?.file?.mimetype
+    const { name, description, ingredients, price } = req.body
+    const product_id = Number(req.params.product_id)
+
+    let imageBuffer
+
+    if (filename) {
+      const { deleteTempFile, getTempFile } = new DiskStorage()
+
+      const { buffer } = await getTempFile(filename)
+      imageBuffer = buffer
+      await deleteTempFile(filename)
+    }
+
+    console.log(imageBuffer)
+    console.log(req.body)
+    console.log(req.params)
 
     const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 
     const { id: updatedProductId } = await productUpdateService.execute({
-      id,
+      id: product_id,
       name,
       description,
-      price,
-      image_id,
+      price: Number(price),
+      ingredients,
+      image: filename ? {
+        image_buffer: imageBuffer,
+        image_name: filename,
+        image_type: mimetype,
+      } : undefined,
     })
 
     return res.json({ id: updatedProductId })

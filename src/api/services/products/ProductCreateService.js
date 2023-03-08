@@ -5,7 +5,7 @@ export class ProductCreateService {
     this.repository = repository
   }
 
-  async execute({ name, description, price, image_id }) {
+  async execute({ categoryId, name, description, price, image_id, ingredients = [] }) {
     if (!name) {
       throw new AppError('Nome do produto é obrigatório.')
     }
@@ -29,8 +29,10 @@ export class ProductCreateService {
     }
 
     const productCreatedId = await this.repository.create({
+      categoryId,
       name,
       description,
+      ingredients,
       price,
       image_id,
     })

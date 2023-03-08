@@ -29,37 +29,18 @@ model Category {
 }
 
 model Product {
-  id          Int                 @id @default(autoincrement())
-  name        String              @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String
   price       Float
   image_id    String
-  image       Image               @relation(fields: [image_id], references: [id])
-  ingredients ProductIngredient[]
-  categories  ProductCategory[]
-  favorites   Favorite[]
+  ingredients String[]
+
+  image      Image             @relation(fields: [image_id], references: [id])
+  categories ProductCategory[]
+  favorites  Favorite[]
 
   @@map("products")
-}
-
-model Ingredient {
-  id       Int                 @id @default(autoincrement())
-  name     String              @unique
-  products ProductIngredient[]
-  image_id String
-  image    Image               @relation(fields: [image_id], references: [id])
-
-  @@map("ingredients")
-}
-
-model ProductIngredient {
-  fk_id_product    Int
-  product          Product    @relation(fields: [fk_id_product], references: [id], onDelete: Cascade)
-  fk_id_ingredient Int
-  ingredient       Ingredient @relation(fields: [fk_id_ingredient], references: [id], onDelete: Cascade)
-
-  @@id([fk_id_product, fk_id_ingredient])
-  @@map("product_ingredient")
 }
 
 model ProductCategory {
@@ -83,12 +64,12 @@ model Favorite {
 }
 
 model Image {
-  id         String       @id
+  id         String @id
   image_data Bytes
   image_type String
   image_name String
-  Ingredient Ingredient[]
-  Product    Product[]
+
+  Product Product[]
 
   @@map("images")
 }

@@ -4,6 +4,14 @@ import { ProductRepository } from '../repositories/products/ProductRepository.js
 import { AddCategoryService } from '../services/categories/AddCategoryService.js'
 
 export class CategoriesController {
+  async index(req, res) {
+    const repository = new CategoryRepository()
+
+    const { categories } = await repository.index()
+
+    return res.json({ categories })
+  }
+
   async create(req, res) {
     const { name, description } = req.body
 

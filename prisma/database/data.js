@@ -73,6 +73,14 @@ export const products = Object.freeze([
     image_id: '01065e55-1c36-49da-b7ab-d96ac207fea3',
     ingredients: ['Água líquida', 'Garrafa'],
   },
+  {
+    id: 4,
+    name: 'Farofa',
+    description: 'Ovos de galinha mexidos com óleo e farinha de mandioca',
+    price: 10,
+    image_id: 'cdb4047d-562a-438d-9741-581f1946f5c8',
+    ingredients: ['Ovos', 'Farinha', 'Óleo'],
+  },
 ])
 
 export const images = Object.freeze([
@@ -92,6 +100,14 @@ export const images = Object.freeze([
     image_type: 'image/png',
     image_name: '01065e55-1c36-49da-b7ab-d96ac207fea3.png',
   },
+  {
+    id: 'cdb4047d-562a-438d-9741-581f1946f5c8',
+    image_data: readFileSync(
+      resolve(__dirname, 'images', 'cdb4047d-562a-438d-9741-581f1946f5c8.jpg')
+    ),
+    image_type: 'image/png',
+    image_name: 'cdb4047d-562a-438d-9741-581f1946f5c8.jpg',
+  },
 ])
 
 export const productCategory = Object.freeze([
@@ -102,6 +118,10 @@ export const productCategory = Object.freeze([
   {
     fk_id_category: 1,
     fk_id_product: 2,
+  },
+  {
+    fk_id_category: 1,
+    fk_id_product: 4,
   },
   {
     fk_id_category: 2,

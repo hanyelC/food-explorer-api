@@ -128,7 +128,7 @@ export class ProductRepository {
   }
 
   async delete(id) {
-    const deletedProduct = await prisma.product.delete({
+    const deletedProduct = await prisma.product.deleteMany({
       where: {
         id,
       },

@@ -108,6 +108,6 @@ export class ProductsController {
 
     await productDeleteService.execute(product_id)
 
-    return res.status(204)
+    return res.sendStatus(204)
   }
 }

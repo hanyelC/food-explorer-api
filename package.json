@@ -5,7 +5,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "pm2-runtime start ecosystem.config.cjs --env production",
     "dev": "cross-env NODE_ENV=development nodemon -L ./src/index.js",
     "format": "prettier --check --write \"src\"",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll",

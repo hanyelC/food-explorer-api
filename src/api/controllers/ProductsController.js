@@ -64,7 +64,7 @@ export class ProductsController {
   async update(req, res) {
     const filename = req?.file?.filename
     const mimetype = req?.file?.mimetype
-    const { name, description, ingredients, price } = req.body
+    const { name, categoryId, description, ingredients, price } = req.body
     const product_id = Number(req.params.product_id)
 
     let imageBuffer
@@ -77,16 +77,13 @@ export class ProductsController {
       await deleteTempFile(filename)
     }
 
-    console.log(imageBuffer)
-    console.log(req.body)
-    console.log(req.params)
-
     const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 
     const { id: updatedProductId } = await productUpdateService.execute({
       id: product_id,
       name,
+      categoryId: Number(categoryId),
       description,
       price: Number(price),
       ingredients,
@@ -106,8 +103,8 @@ export class ProductsController {
     const productRepository = new ProductRepository()
     const productDeleteService = new ProductDeleteService(productRepository)
 
-    await productDeleteService.execute(product_id)
+    await productDeleteService.execute(+product_id)
 
-    return res.status(204)
+    return res.sendStatus(204)
   }
 }

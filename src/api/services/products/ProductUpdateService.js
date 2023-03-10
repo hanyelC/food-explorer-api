@@ -6,7 +6,15 @@ export class ProductUpdateService {
     this.repository = repository
   }
 
-  async execute({ id, name, description, price, image, ingredients }) {
+  async execute({
+    id,
+    categoryId,
+    description,
+    image,
+    ingredients,
+    name,
+    price,
+  }) {
     if (!id) {
       throw new AppError('Id do produto é obrigatório.')
     }
@@ -46,7 +54,7 @@ export class ProductUpdateService {
     }
 
     let image_id
-    
+
     if (image) {
       const { image_buffer, image_name, image_type } = image
 
@@ -70,6 +78,7 @@ export class ProductUpdateService {
 
     const prod = await this.repository.update({
       id,
+      categoryId,
       name,
       description,
       price,

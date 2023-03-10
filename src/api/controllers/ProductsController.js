@@ -77,10 +77,6 @@ export class ProductsController {
       await deleteTempFile(filename)
     }
 
-    console.log(imageBuffer)
-    console.log(req.body)
-    console.log(req.params)
-
     const productRepository = new ProductRepository()
     const productUpdateService = new ProductUpdateService(productRepository)
 

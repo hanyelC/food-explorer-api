@@ -64,7 +64,7 @@ export class ProductsController {
   async update(req, res) {
     const filename = req?.file?.filename
     const mimetype = req?.file?.mimetype
-    const { name, description, ingredients, price } = req.body
+    const { name, categoryId, description, ingredients, price } = req.body
     const product_id = Number(req.params.product_id)
 
     let imageBuffer
@@ -83,6 +83,7 @@ export class ProductsController {
     const { id: updatedProductId } = await productUpdateService.execute({
       id: product_id,
       name,
+      categoryId: Number(categoryId),
       description,
       price: Number(price),
       ingredients,

@@ -110,7 +110,15 @@ export class ProductRepository {
     return { id: newProduct.id }
   }
 
-  async update({ id, name, description, price, image_id, ingredients }) {
+  async update({
+    id,
+    categoryId,
+    description,
+    image_id,
+    ingredients,
+    name,
+    price,
+  }) {
     const product = await prisma.product.update({
       where: {
         id,
@@ -123,6 +131,26 @@ export class ProductRepository {
         ingredients,
       },
     })
+
+    if (categoryId) {
+      const deleteOldRelationsQuery = prisma.productCategory.deleteMany({
+        where: {
+          fk_id_product: id,
+        },
+      })
+
+      const createNewRelationQuery = prisma.productCategory.create({
+        data: {
+          fk_id_category: categoryId,
+          fk_id_product: id,
+        },
+      })
+
+      await prisma.$transaction([
+        deleteOldRelationsQuery,
+        createNewRelationQuery,
+      ])
+    }
 
     return product
   }

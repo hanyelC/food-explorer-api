@@ -106,7 +106,7 @@ export class ProductsController {
     const productRepository = new ProductRepository()
     const productDeleteService = new ProductDeleteService(productRepository)
 
-    await productDeleteService.execute(product_id)
+    await productDeleteService.execute(+product_id)
 
     return res.sendStatus(204)
   }

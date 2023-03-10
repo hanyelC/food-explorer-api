@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import { ImagesRepository } from '../repositories/images/ImagesRepository.js'
 
-import { TMP_FOLDER, UPLOADS_FOLDER } from '../../config/upload.js'
+import { TMP_FOLDER } from '../../config/upload.js'
 import { DiskStorage } from '../../providers/DiskStorage.js'
 
 export class ImagesController {
@@ -32,19 +32,6 @@ export class ImagesController {
   async show(req, res) {
     const { image_name } = req.params
 
-    let fileExists
-
-    try {
-      await fs.promises.access(path.resolve(UPLOADS_FOLDER, image_name))
-      fileExists = true
-    } catch {
-      fileExists = false
-    }
-
-    if (fileExists) {
-      return res.redirect(`/files/${image_name}`)
-    }
-
     const repository = new ImagesRepository()
 
     const id = image_name.split('.')[0]
@@ -55,9 +42,6 @@ export class ImagesController {
       return res.status(404).json({ message: 'Image not found' })
     }
 
-    const diskStorage = new DiskStorage()
-    diskStorage.saveFile(image.image_data, image_name)
-
-    return res.redirect(`/files/${image_name}`)
+    return res.send(image.image_data)
   }
 }

@@ -30,7 +30,7 @@ export class ProductRepository {
           },
         },
       },
-      where: search && {
+      where: search ? {
         OR: [
           {
             name: {
@@ -40,11 +40,11 @@ export class ProductRepository {
           },
           {
             ingredients: {
-              hasSome: search.toLowerCase().split(' ').filter(item => item !== '')
+              hasSome: search.split(' ').filter(item => item !== '').concat(search)
             }
           }
         ],
-      },
+      } : undefined,
       orderBy: {
         id: 'asc',
       },

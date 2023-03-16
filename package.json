@@ -6,11 +6,17 @@
   "main": "src/index.js",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.cjs --env production",
+    "start:dev": "npm run services:up && npm run db:migration:deploy && npm run db:seed:dev && npm run dev",
     "dev": "cross-env NODE_ENV=development nodemon -L ./src/index.js",
     "format": "prettier --check --write \"src\"",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll",
     "prepare": "husky install",
-    "debug": "nodemon --inspect ./src/index.js"
+    "debug": "nodemon --inspect ./src/index.js",
+    "db:migration:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
+    "db:seed:dev": "NODE_ENV=development prisma db seed",
+    "services:up": "docker compose up -d",
+    "services:stop": "docker compose stop"
   },
   "repository": {
     "type": "git",

@@ -9,10 +9,12 @@ import { DiskStorage } from '../../providers/DiskStorage.js'
 
 export class ProductsController {
   async index(req, res) {
+    const { q } = req.query
+
     const productRepository = new ProductRepository()
     const productsListService = new ProductsListService(productRepository)
 
-    const products = await productsListService.execute()
+    const products = await productsListService.execute({ search: q })
 
     return res.json(products)
   }

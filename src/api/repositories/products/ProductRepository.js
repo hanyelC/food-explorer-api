@@ -1,7 +1,9 @@
 import { prisma } from '../../lib/prisma.js'
 
 export class ProductRepository {
-  async index() {
+  async index(params) {
+    const search = params?.search
+    
     const products = await prisma.product.findMany({
       select: {
         id: true,
@@ -28,10 +30,26 @@ export class ProductRepository {
           },
         },
       },
+      where: search && {
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            ingredients: {
+              hasSome: search.toLowerCase().split(' ').filter(item => item !== '')
+            }
+          }
+        ],
+      },
       orderBy: {
         id: 'asc',
       },
     })
+
     return products
   }
 

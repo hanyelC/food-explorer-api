@@ -3,8 +3,8 @@ export class ProductsListService {
     this.repository = repository
   }
 
-  async execute() {
-    const products = await this.repository.index()
+  async execute({ search }) {
+    const products = await this.repository.index({ search })
 
     return products
   }

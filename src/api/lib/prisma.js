@@ -10,7 +10,9 @@ if (env === 'production') {
   prisma = new PrismaClient()
 } else {
   if (!global.prisma) {
-    global.prisma = new PrismaClient()
+    global.prisma = new PrismaClient({
+      log: env === 'development' ? ['query'] : undefined
+    })
   }
 
   prisma = global.prisma
